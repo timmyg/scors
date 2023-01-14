@@ -1,29 +1,13 @@
 import Image from "next/image";
 import { Inter } from "@next/font/google";
-// import styles from "./page.module.css";
 import wretch from "wretch";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { GetServerSidePropsContext } from "next";
-import styles from "./index.module.css";
-import { createStyles } from "@mui/material";
-import { makeStyles } from "@mui/styles";
 import { GameStatus, TeamStatus } from "@/types";
 
-// const useStyles = makeStyles(() =>
-//   createStyles({
-//     table: {
-//       minWidth: 650,
-//     },
-//   })
-// );
-
-const inter = Inter({ subsets: ["latin"] });
+// const inter = Inter({ subsets: ["latin"] });
+import { ThemeProvider } from "@emotion/react";
+import theme from "@rebass/preset";
 interface Props {
   games: GameStatus[];
 }
@@ -36,29 +20,18 @@ function Home({ games }: Props) {
     return "";
   };
   return (
-    <TableContainer component={Paper}>
-      <Table aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell></TableCell>
-            <TableCell align="right"></TableCell>
-            <TableCell align="right"></TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {games.map((game: GameStatus) => (
-            <TableRow key={game.id}>
-              <TableCell component="th" scope="row">
-                {getRankString(game.awayTeam)} {game.awayTeam.name}{" "}
-                <b>{game.awayTeam.score}</b> @ {getRankString(game.homeTeam)}
-                {game.homeTeam.name} <b>{game.homeTeam.score}</b>
-              </TableCell>
-              <TableCell align="right">{game.status}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <ThemeProvider theme={theme}>
+      {games.map((game: GameStatus) => (
+        <p key={game.id}>
+          <span>
+            {getRankString(game.awayTeam)} {game.awayTeam.name}{" "}
+            <b>{game.awayTeam.score}</b> @ {getRankString(game.homeTeam)}
+            {game.homeTeam.name} <b>{game.homeTeam.score}</b>
+          </span>
+          <span style={{ paddingLeft: "8px" }}>{game.status}</span>
+        </p>
+      ))}
+    </ThemeProvider>
   );
 }
 
