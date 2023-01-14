@@ -1,9 +1,12 @@
+interface TeamStatus {
+  name: string;
+  score: number;
+  rank: number;
+}
 export interface GameStatus {
   id: number;
   name: string;
   status: string;
-  awayTeam: string;
-  awayScore: number;
-  homeTeam: string;
-  homeScore: number;
+  awayTeam: TeamStatus;
+  homeTeam: TeamStatus;
 }

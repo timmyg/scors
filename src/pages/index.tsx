@@ -26,6 +26,12 @@ const useStyles = makeStyles(() =>
 const inter = Inter({ subsets: ["latin"] });
 function Home({ games }) {
   const classes = useStyles();
+  const getRankString = (team) => {
+    if (team.rank) {
+      return `(${team.rank}) `;
+    }
+    return "";
+  };
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
@@ -40,8 +46,9 @@ function Home({ games }) {
           {games.map((game: GameStatus) => (
             <TableRow key={game.id}>
               <TableCell component="th" scope="row">
-                {game.awayTeam} <b>{game.awayScore}</b> @ {game.homeTeam}{" "}
-                <b>{game.homeScore}</b>
+                {getRankString(game.awayTeam)} {game.awayTeam.name}{" "}
+                <b>{game.awayTeam.score}</b> @ {getRankString(game.homeTeam)}
+                {game.homeTeam.name} <b>{game.homeTeam.score}</b>
               </TableCell>
               <TableCell align="right">{game.status}</TableCell>
             </TableRow>

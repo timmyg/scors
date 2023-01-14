@@ -13,19 +13,25 @@ export default async function (req: NowRequest, res: NowResponse) {
     })
     .get()
     .json();
-  // console.log({
-  //   game: response.games[10],
-  //   x: response.games[10].teams,
-  // });
+  console.log({
+    game: response.games[3],
+    x: response.games[3].ranks,
+  });
   const scores: GameStatus[] = response.games.map((game: any) => {
     const [awayTeam, homeTeam] = game.teams;
     return {
       id: game.id,
       status: game.status_display,
-      awayTeam: awayTeam.display_name,
-      awayScore: game.boxscore?.total_away_points || 0,
-      homeTeam: homeTeam.display_name,
-      homeScore: game.boxscore?.total_home_points || 0,
+      awayTeam: {
+        name: awayTeam.display_name,
+        score: game.boxscore?.total_away_points || 0,
+        rank: game.ranks?.find((t: any) => t.team_id === awayTeam.id)?.rank,
+      },
+      homeTeam: {
+        name: homeTeam.display_name,
+        score: game.boxscore?.total_home_points || 0,
+        rank: game.ranks?.find((t: any) => t.team_id === homeTeam.id)?.rank,
+      },
     } as GameStatus;
   });
   return res.status(200).json(scores);
