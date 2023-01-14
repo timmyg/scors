@@ -13,6 +13,7 @@ import { GetServerSidePropsContext } from "next";
 import styles from "../app/page.module.css";
 import { createStyles } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import { GameStatus } from "@/types";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -30,19 +31,19 @@ function Home({ games }) {
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Team 1</TableCell>
-            <TableCell align="right">Score</TableCell>
-            <TableCell align="right">Team 2</TableCell>
-            <TableCell align="right">Score</TableCell>
+            <TableCell></TableCell>
+            <TableCell align="right"></TableCell>
+            <TableCell align="right"></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {games.map((game) => (
+          {games.map((game: GameStatus) => (
             <TableRow key={game.id}>
               <TableCell component="th" scope="row">
-                {game.name}
+                {game.awayTeam} <b>{game.awayScore}</b> @ {game.homeTeam}{" "}
+                <b>{game.homeScore}</b>
               </TableCell>
-              <TableCell align="right">0 - 0</TableCell>
+              <TableCell align="right">{game.status}</TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -58,7 +59,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       ? `${protocol}://${context.req.headers.host}`
       : "";
     const response = await wretch(`${baseUrl}/api/scores`).get().json();
-    console.log("response...", { response });
     return { props: { games: response } };
   } catch (e) {
     console.error({ e });
