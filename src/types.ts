@@ -1,4 +1,4 @@
-interface TeamStatus {
+export interface TeamStatus {
   name: string;
   score: number;
   rank: number;

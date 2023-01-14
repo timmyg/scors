@@ -10,23 +10,26 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { GetServerSidePropsContext } from "next";
-import styles from "../app/page.module.css";
+import styles from "./index.module.css";
 import { createStyles } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { GameStatus } from "@/types";
+import { GameStatus, TeamStatus } from "@/types";
 
-const useStyles = makeStyles(() =>
-  createStyles({
-    table: {
-      minWidth: 650,
-    },
-  })
-);
+// const useStyles = makeStyles(() =>
+//   createStyles({
+//     table: {
+//       minWidth: 650,
+//     },
+//   })
+// );
 
 const inter = Inter({ subsets: ["latin"] });
-function Home({ games }) {
-  const classes = useStyles();
-  const getRankString = (team) => {
+interface Props {
+  games: GameStatus[];
+}
+function Home({ games }: Props) {
+  // const classes = useStyles();
+  const getRankString = (team: TeamStatus) => {
     if (team.rank) {
       return `(${team.rank}) `;
     }
@@ -34,7 +37,7 @@ function Home({ games }) {
   };
   return (
     <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="simple table">
+      <Table aria-label="simple table">
         <TableHead>
           <TableRow>
             <TableCell></TableCell>

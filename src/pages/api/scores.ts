@@ -1,8 +1,8 @@
 import { GameStatus } from "@/types";
-import { NowRequest, NowResponse } from "@vercel/node";
+import { VercelRequest, VercelResponse } from "@vercel/node";
 import wretch from "wretch";
 
-export default async function (req: NowRequest, res: NowResponse) {
+export default async function (req: VercelRequest, res: VercelResponse) {
   //   console.log("SCORES!");
   const actionNetworkEndpoint =
     "https://api.actionnetwork.com/web/v1/scoreboard/ncaab?bookIds=15&division=D1&tournament=0&period=game";
@@ -13,10 +13,10 @@ export default async function (req: NowRequest, res: NowResponse) {
     })
     .get()
     .json();
-  console.log({
-    game: response.games[3],
-    x: response.games[3].ranks,
-  });
+  // console.log({
+  //   game: response.games[3],
+  //   x: response.games[3].ranks,
+  // });
   const scores: GameStatus[] = response.games.map((game: any) => {
     const [awayTeam, homeTeam] = game.teams;
     return {
