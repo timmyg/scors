@@ -1,7 +1,7 @@
-import Image from "next/image";
-import { Inter } from "@next/font/google";
+// import Image from "next/image";
+// import { Inter } from "@next/font/google";
 import wretch from "wretch";
-import Paper from "@mui/material/Paper";
+// import Paper from "@mui/material/Paper";
 import { GetServerSidePropsContext } from "next";
 import { GameStatus, TeamStatus } from "@/types";
 
