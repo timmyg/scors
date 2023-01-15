@@ -7,12 +7,13 @@ import { GameStatus, TeamStatus } from "@/types";
 
 // const inter = Inter({ subsets: ["latin"] });
 import { ThemeProvider } from "@emotion/react";
-import theme from "@rebass/preset";
+// import theme from "@rebass/preset";
 interface Props {
   games: GameStatus[];
 }
 function Home({ games }: Props) {
   // const classes = useStyles();
+  const theme = {};
   const getRankString = (team: TeamStatus) => {
     if (team.rank) {
       return `(${team.rank}) `;
