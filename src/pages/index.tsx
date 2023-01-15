@@ -42,8 +42,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     const baseUrl = context.req
       ? `${protocol}://${context.req.headers.host}`
       : "";
-    const response = await wretch(`${baseUrl}/api/scores`).get().json();
-    return { props: { games: response } };
+    const response: any = await wretch(`${baseUrl}/api/scores`).get().json();
+    return { props: { games: response.data.games } };
   } catch (e) {
     console.error({ e });
   }

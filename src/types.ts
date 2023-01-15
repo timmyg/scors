@@ -6,6 +6,7 @@ export interface TeamStatus {
 export interface GameStatus {
   id: number;
   name: string;
+  statusId: string;
   status: string;
   awayTeam: TeamStatus;
   homeTeam: TeamStatus;
