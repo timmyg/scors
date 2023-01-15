@@ -1,19 +1,19 @@
-// import Image from "next/image";
-// import { Inter } from "@next/font/google";
+import { Inter } from "@next/font/google";
 import wretch from "wretch";
-// import Paper from "@mui/material/Paper";
 import { GetServerSidePropsContext } from "next";
 import { GameStatus, TeamStatus } from "@/types";
+import { ThemeProvider } from "next-themes";
+// import { ThemeProvider } from "@emotion/react";
 
-// const inter = Inter({ subsets: ["latin"] });
-import { ThemeProvider } from "@emotion/react";
-// import theme from "@rebass/preset";
+const inter = Inter({ subsets: ["latin"] });
+// export const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
+
 interface Props {
   games: GameStatus[];
 }
+
 function Home({ games }: Props) {
   // const classes = useStyles();
-  const theme = {};
   const getRankString = (team: TeamStatus) => {
     if (team.rank) {
       return `(${team.rank}) `;
@@ -21,17 +21,19 @@ function Home({ games }: Props) {
     return "";
   };
   return (
-    <ThemeProvider theme={theme}>
-      {games.map((game: GameStatus) => (
-        <p key={game.id}>
-          <span>
-            {getRankString(game.awayTeam)} {game.awayTeam.name}{" "}
-            <b>{game.awayTeam.score}</b> @ {getRankString(game.homeTeam)}
-            {game.homeTeam.name} <b>{game.homeTeam.score}</b>
-          </span>
-          <span style={{ paddingLeft: "8px" }}>{game.status}</span>
-        </p>
-      ))}
+    <ThemeProvider attribute="class">
+      <main className={inter.className}>
+        {games.map((game: GameStatus) => (
+          <p key={game.id}>
+            <span>
+              {getRankString(game.awayTeam)} {game.awayTeam.name}{" "}
+              <b>{game.awayTeam.score}</b> @ {getRankString(game.homeTeam)}
+              {game.homeTeam.name} <b>{game.homeTeam.score}</b>
+            </span>
+            <span style={{ paddingLeft: "8px" }}>{game.statusDisplay}</span>
+          </p>
+        ))}
+      </main>
     </ThemeProvider>
   );
 }

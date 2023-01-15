@@ -21,7 +21,7 @@ export default async function (req: VercelRequest, res: VercelResponse) {
     const [awayTeam, homeTeam] = game.teams;
     return {
       id: game.id,
-      status: game.status_display,
+      statusDisplay: game.status_display,
       statusId: game.status.toLowerCase(),
       awayTeam: {
         name: awayTeam.display_name,
