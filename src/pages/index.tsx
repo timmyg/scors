@@ -3,18 +3,15 @@ import wretch from "wretch";
 import { GetServerSidePropsContext } from "next";
 import { GameStatus, TeamStatus } from "@/types";
 import { ThemeProvider } from "next-themes";
-// import { ThemeProvider } from "@emotion/react";
 
 const inter = Inter({ subsets: ["latin"] });
-// export const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 
 interface Props {
   games: GameStatus[];
 }
 
 function Home({ games }: Props) {
-  // const classes = useStyles();
-  const getRankString = (team: TeamStatus) => {
+  const getRankString = (team: TeamStatus): string => {
     if (team.rank) {
       return `(${team.rank}) `;
     }
