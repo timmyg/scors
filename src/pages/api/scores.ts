@@ -50,5 +50,6 @@ export default async function (req: VercelRequest, res: VercelResponse) {
 
   return res.status(200).json({
     data: { games: gamesSorted },
+    timestamp: new Date().toISOString(),
   });
 }
