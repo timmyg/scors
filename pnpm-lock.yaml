@@ -14,8 +14,10 @@ specifiers:
   next: 13.1.2
   next-themes: 0.2.1
   react: 18.2.0
+  react-adaptive-hooks: 0.0.8
   react-dom: 18.2.0
   typescript: 4.9.4
+  use-network-status: 0.1.3
   wretch: 2.3.2
 
 dependencies:
@@ -32,8 +34,10 @@ dependencies:
   next: 13.1.2_biqbaboplfbrettd7655fr4n2y
   next-themes: 0.2.1_7jnwqgtpcnwg4nzft4b6xlzlfi
   react: 18.2.0
+  react-adaptive-hooks: 0.0.8_react@18.2.0
   react-dom: 18.2.0_react@18.2.0
   typescript: 4.9.4
+  use-network-status: 0.1.3_react@18.2.0
   wretch: 2.3.2
 
 packages:
@@ -2501,6 +2505,14 @@ packages:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
     dev: false
 
+  /react-adaptive-hooks/0.0.8_react@18.2.0:
+    resolution: {integrity: sha512-akbhO9JrE3ACpjNJpvHKgeWtM9YSNH73tBuBeSCxECGG8SkXMm1ZW51Dr2957zUMK3Mxx8G/MYejoHGWZNCQAg==}
+    peerDependencies:
+      react: ^16.8.0
+    dependencies:
+      react: 18.2.0
+    dev: false
+
   /react-dom/18.2.0_react@18.2.0:
     resolution: {integrity: sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==}
     peerDependencies:
@@ -2907,6 +2919,15 @@ packages:
     resolution: {integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==}
     dependencies:
       punycode: 2.2.0
+    dev: false
+
+  /use-network-status/0.1.3_react@18.2.0:
+    resolution: {integrity: sha512-NTUpPwHv3hakPFFssvnqY2x9akedC1CeCwiAPoEXOi2oDwO1qPKk7z11QwhsoYZEc8sF29pQr8r7GCpl4xrf/g==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      react: '>=16'
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /v8-compile-cache-lib/3.0.1:

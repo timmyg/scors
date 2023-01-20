@@ -3,6 +3,8 @@ import wretch from "wretch";
 import { GetServerSidePropsContext } from "next";
 import { GameStatus, TeamStatus } from "@/types";
 import { ThemeProvider } from "next-themes";
+import { NetworkStatus } from "@/components/networkStatus";
+import { Scoreboard } from "@/components/scoreboard";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -11,25 +13,11 @@ interface Props {
 }
 
 function Home({ games }: Props) {
-  const getRankString = (team: TeamStatus): string => {
-    if (team.rank) {
-      return `(${team.rank}) `;
-    }
-    return "";
-  };
   return (
     <ThemeProvider attribute="class">
       <main className={inter.className}>
-        {games.map((game: GameStatus) => (
-          <p key={game.id}>
-            <span>
-              {getRankString(game.awayTeam)} {game.awayTeam.name}{" "}
-              <b>{game.awayTeam.score}</b> @ {getRankString(game.homeTeam)}
-              {game.homeTeam.name} <b>{game.homeTeam.score}</b>
-            </span>
-            <span style={{ paddingLeft: "8px" }}>{game.statusDisplay}</span>
-          </p>
-        ))}
+        <NetworkStatus />
+        <Scoreboard games={games} />
       </main>
     </ThemeProvider>
   );
