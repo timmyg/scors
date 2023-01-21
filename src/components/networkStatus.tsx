@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
-import { useNetworkStatus } from "react-adaptive-hooks";
+import {
+  useNetworkStatus,
+  EffectiveConnectionType,
+} from "react-adaptive-hooks";
 
 enum NetworkStatusThreshold {
   Offline = "Offline",
@@ -36,6 +39,8 @@ export const NetworkStatus = () => {
   }, [effectiveConnectionType]);
 
   return (
-    <div className="status">{isReady ? `Connection: ${status}` : "..."}</div>
+    <div className="status">
+      {isReady ? `Connection: ${status} (${effectiveConnectionType})` : "..."}
+    </div>
   );
 };
