@@ -35,5 +35,7 @@ export const NetworkStatus = () => {
     setIsReady(true);
   }, [effectiveConnectionType]);
 
-  return <div className="status">{isReady ? status : "..."}</div>;
+  return (
+    <div className="status">{isReady ? `Connection: ${status}` : "..."}</div>
+  );
 };
