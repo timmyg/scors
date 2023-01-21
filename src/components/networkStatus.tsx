@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNetworkStatus } from "react-adaptive-hooks/dist/index.umd.js";
+import { useNetworkStatus } from "react-adaptive-hooks";
 
 enum NetworkStatusThreshold {
   Offline = "Offline",
