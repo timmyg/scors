@@ -7,10 +7,10 @@ interface Link {
 }
 
 const links: Link[] = [
-  { label: "nba", href: "#nba" },
-  { label: "ncaab", href: "#ncaab" },
-  { label: "nfl", href: "#nfl" },
-  { label: "ncaaw", href: "#ncaaw" },
+  { label: "nba", href: "/nba" },
+  { label: "ncaab", href: "/ncaab" },
+  { label: "nfl", href: "/nfl" },
+  { label: "nhl", href: "/nhl" },
   //   { label: "nhl", href: "#nhl", disabled: true },
   //   { label: "soccer", href: "#soccer", disabled: true },
   //   { label: "mlb", href: "#mlb", disabled: true },
@@ -21,14 +21,15 @@ export const SportsPicker = () => {
     <div className="overflow-x-scroll h-3xl p-4">
       <div className="flex">
         {links.map((link) => (
-          <a
+          <Link
             href={link.href}
+            passHref={true}
             className="text-3xl mr-4"
             // disabled={link.disabled || false}
             key={link.href}
           >
             {link.label}
-          </a>
+          </Link>
         ))}
       </div>
     </div>

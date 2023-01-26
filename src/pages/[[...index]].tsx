@@ -28,21 +28,24 @@ interface Response {
 }
 interface Props {
   response: Response;
+  initialSport: string;
 }
 
-const sport = "ncaab";
-
-function Home({ response }: Props) {
+function Home({ response, initialSport }: Props) {
   // console.log("home");
   const router = useRouter();
   const { data: newResponse, timestamp }: any = useSWR(
-    `/api/scores/${sport}`,
+    `/api/scores/${initialSport}`,
     fetcher,
     {
       initialData: response,
       refreshInterval: 15000,
     }
   );
+  useEffect(() => {
+    const hash = router.asPath.split("#")[1];
+    console.log({ hash });
+  }, [router.asPath]);
   const [toggleFavorite, { favorites }] = useFavorites();
   // const [games, setGames] = useState<GameStatus[]>([]);
   const [games, setGames] = useState<GameStatus[]>(
@@ -94,14 +97,29 @@ function Home({ response }: Props) {
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   try {
-    const protocol = process.env.VERCEL_URL ? "https" : "http";
-    const baseUrl = context.req
-      ? `${protocol}://${context.req.headers.host}`
-      : "";
-    const response: any = await wretch(`${baseUrl}/api/scores/${sport}`)
-      .get()
-      .json();
-    return { props: { response } };
+    // const { hash } = context.query;
+    console.log("getSSP", context?.resolvedUrl);
+    const sportFromUrl = context?.resolvedUrl?.split("/")?.[1];
+    console.log({ sportFromUrl });
+    // return;
+    if (!sportFromUrl) {
+      context.res.writeHead(302, {
+        Location: `/ncaab`,
+      });
+      context.res.end();
+      return { props: {} };
+    } else {
+      const protocol = process.env.VERCEL_URL ? "https" : "http";
+      const baseUrl = context.req
+        ? `${protocol}://${context.req.headers.host}`
+        : "";
+      const response: any = await wretch(
+        `${baseUrl}/api/scores/${sportFromUrl}`
+      )
+        .get()
+        .json();
+      return { props: { response, initialSport: sportFromUrl } };
+    }
   } catch (e) {
     console.error({ e });
     // throw new Error("Error fetching data");

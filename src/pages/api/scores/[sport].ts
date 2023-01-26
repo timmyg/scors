@@ -4,7 +4,7 @@ import wretch from "wretch";
 
 export default async function (req: VercelRequest, res: VercelResponse) {
   const sport: string = req.query.sport as string;
-  if (["ncaab", "nfl", "nba"].indexOf(sport) === -1) {
+  if (["ncaab", "nfl", "nba", "nhl"].indexOf(sport) === -1) {
     return res.status(400).json({ message: "Invalid sport" });
   }
   const actionNetworkEndpoint = `https://api.actionnetwork.com/web/v1/scoreboard/${sport}?bookIds=15&period=game`;
