@@ -1,11 +1,11 @@
-import { Inter } from "@next/font/google";
 import wretch from "wretch";
+import useSWR from "swr";
+import { Inter } from "@next/font/google";
 import { GetServerSidePropsContext } from "next";
 import { GameStatus } from "@/types";
 import { ThemeProvider } from "next-themes";
 import { ScoreboardAll } from "@/components/ScoreboardAll";
-import { NetworkStatus } from "@/components/NetworkStatus";
-import useSWR from "swr";
+import { NetworkStatus } from "@/components/StatusNetwork";
 import { SportsPicker } from "@/components/SportsPicker";
 import { LastUpdated } from "@/components/LastUpdated";
 
