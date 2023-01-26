@@ -98,9 +98,9 @@ function Home({ response, initialSport }: Props) {
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   try {
     // const { hash } = context.query;
-    console.log("getSSP", context?.resolvedUrl);
+    // console.log("getSSP", context?.resolvedUrl);
     const sportFromUrl = context?.resolvedUrl?.split("/")?.[1];
-    console.log({ sportFromUrl });
+    // console.log({ sportFromUrl });
     // return;
     if (!sportFromUrl) {
       context.res.writeHead(302, {

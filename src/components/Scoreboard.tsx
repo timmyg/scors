@@ -22,7 +22,7 @@ const Scoreboard = ({ game, status, onFavoriteToggle }: Props) => {
   };
 
   return (
-    <div className="bg-gray-800 p-4 rounded-lg m-4">
+    <div className="bg-gray-400 p-4 rounded-lg m-4">
       <div className="flex">
         <div className="w-3/5">
           <div className="flex items-center">
