@@ -5,20 +5,23 @@ interface Props {
   scoreB: number;
   status: string;
 }
+
 const Scoreboard = ({ teamA, teamB, scoreA, scoreB, status }: Props) => {
   return (
-    <div className="bg-gray-800 p-4 rounded-lg">
+    <div className="bg-gray-800 p-4 rounded-lg m-4">
       <div className="flex">
-        <div className="w-1/2">
-          <div className="text-white font-medium">{teamA}</div>
-          <div className="text-3xl font-medium text-white">{scoreA}</div>
+        <div className="w-3/5">
+          <div className="text-xl">{teamA}</div>
+          <div className="text-xl">{teamB}</div>
         </div>
-        <div className="w-1/2">
-          <div className="text-white font-medium">{teamB}</div>
-          <div className="text-3xl font-medium text-white">{scoreB}</div>
+        <div className="w-1/5">
+          <div className="text-xl">{scoreA}</div>
+          <div className="text-xl">{scoreB}</div>
+        </div>
+        <div className="w-1/5 flex justify-center items-center">
+          <div className="text-sm ">{status}</div>
         </div>
       </div>
-      <div className="text-white text-sm font-medium mt-2">{status}</div>
     </div>
   );
 };

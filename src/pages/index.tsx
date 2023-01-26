@@ -6,7 +6,6 @@ import { ThemeProvider } from "next-themes";
 import { NetworkStatus } from "@/components/NetworkStatus";
 import { ScoreboardAll } from "@/components/ScoreboardAll";
 import useSWR from "swr";
-import { useEffect, useState } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,7 +25,7 @@ interface Props {
   response: Response;
 }
 
-const sport = "nba";
+const sport = "ncaab";
 
 function Home({ response }: Props) {
   const { data: newResponse, timestamp }: any = useSWR(
@@ -37,14 +36,6 @@ function Home({ response }: Props) {
       refreshInterval: 5000,
     }
   );
-  console.log({ newResponse, timestamp });
-
-  // useEffect(() => {
-  //   const intervalId = setInterval(() => {
-  //     setTick(tick + 1);
-  //   }, 5000);
-  //   return () => clearInterval(intervalId);
-  // }, [tick]);
   if (!newResponse) {
     return "Loading...";
   }

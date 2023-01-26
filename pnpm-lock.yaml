@@ -16,6 +16,7 @@ specifiers:
   next: 13.1.2
   next-themes: 0.2.1
   postcss: 8.4.21
+  postcss-import: 15.1.0
   react: 18.2.0
   react-adaptive-hooks: 0.0.8
   react-dom: 18.2.0
@@ -50,6 +51,7 @@ dependencies:
 devDependencies:
   autoprefixer: 10.4.13_postcss@8.4.21
   postcss: 8.4.21
+  postcss-import: 15.1.0_postcss@8.4.21
   tailwindcss: 3.2.4_postcss@8.4.21
 
 packages:
@@ -2625,6 +2627,18 @@ packages:
   /postcss-import/14.1.0_postcss@8.4.21:
     resolution: {integrity: sha512-flwI+Vgm4SElObFVPpTIT7SU7R3qk2L7PyduMcokiaVKuWv9d/U+Gm/QAd8NDLuykTWTkcrjOeD2Pp1rMeBTGw==}
     engines: {node: '>=10.0.0'}
+    peerDependencies:
+      postcss: ^8.0.0
+    dependencies:
+      postcss: 8.4.21
+      postcss-value-parser: 4.2.0
+      read-cache: 1.0.0
+      resolve: 1.22.1
+    dev: true
+
+  /postcss-import/15.1.0_postcss@8.4.21:
+    resolution: {integrity: sha512-hpr+J05B2FVYUAXHeK1YyI267J/dDDhMU6B6civm8hSY1jYJnBXxzKDKDswzJmtLHryrjhnDjqqp/49t8FALew==}
+    engines: {node: '>=14.0.0'}
     peerDependencies:
       postcss: ^8.0.0
     dependencies:

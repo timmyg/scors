@@ -1,3 +1,4 @@
+import Scoreboard from "@/atoms/Scoreboard";
 import { GameStatus, TeamStatus } from "@/types";
 
 interface Props {
@@ -13,15 +14,16 @@ export const ScoreboardAll = ({ games }: Props) => {
   };
 
   const renderGames = (games: GameStatus[]) => {
-    return games.map((game: GameStatus) => (
-      <p key={game.id}>
-        <span>
-          {getRankString(game.awayTeam)} {game.awayTeam.name}{" "}
-          <b>{game.awayTeam.score}</b> @ {getRankString(game.homeTeam)}
-          {game.homeTeam.name} <b>{game.homeTeam.score}</b>
-        </span>
-        <span style={{ paddingLeft: "8px" }}>{game.statusDisplay}</span>
-      </p>
+    console.log({ games });
+    return games.map((game: GameStatus, i: number) => (
+      <Scoreboard
+        teamA={`${getRankString(game.awayTeam)} ${game.awayTeam.name}`}
+        teamB={`${getRankString(game.homeTeam)} ${game.homeTeam.name}`}
+        scoreA={game.awayTeam.score}
+        scoreB={game.homeTeam.score}
+        status={game.statusDisplay}
+        key={i}
+      />
     ));
   };
 
