@@ -2,13 +2,15 @@ import wretch from "wretch";
 import useSWR from "swr";
 import { Inter } from "@next/font/google";
 import { GetServerSidePropsContext } from "next";
-import { GameStatus } from "@/types";
+import { GameStatus, TeamStatus } from "@/types";
 import { ThemeProvider } from "next-themes";
 import { ScoreboardAll } from "@/components/ScoreboardAll";
 import { NetworkStatus } from "@/components/StatusNetwork";
 import { SportsPicker } from "@/components/SportsPicker";
 import { LastUpdated } from "@/components/LastUpdated";
 import { useFavorites } from "hooks/useFavorites";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -31,20 +33,48 @@ interface Props {
 const sport = "ncaab";
 
 function Home({ response }: Props) {
+  // console.log("home");
+  const router = useRouter();
   const { data: newResponse, timestamp }: any = useSWR(
     `/api/scores/${sport}`,
     fetcher,
     {
       initialData: response,
-      refreshInterval: 5000,
+      refreshInterval: 15000,
     }
   );
-  const [_, toggleFavorite] = useFavorites();
+  const [toggleFavorite, { favorites }] = useFavorites();
+  // const [games, setGames] = useState<GameStatus[]>([]);
+  const [games, setGames] = useState<GameStatus[]>(
+    newResponse?.data?.games || []
+  );
+  useEffect(() => {
+    if (newResponse?.data?.games) {
+      newResponse?.data?.games.map((game: GameStatus) => {
+        game.awayTeam.isFavorite = favorites.includes(game.awayTeam.id);
+        game.homeTeam.isFavorite = favorites.includes(game.homeTeam.id);
+      });
+      const sortedGames = newResponse?.data?.games.sort(
+        (a: GameStatus, b: GameStatus) => {
+          if (
+            (a.homeTeam.isFavorite || a.awayTeam.isFavorite) ===
+            (b.homeTeam.isFavorite || b.awayTeam.isFavorite)
+          ) {
+            return 0;
+          }
+          return a.homeTeam.isFavorite || a.awayTeam.isFavorite ? -1 : 1;
+        }
+      );
+      setGames(sortedGames);
+    }
+  }, [newResponse?.data?.games]);
   if (!newResponse) {
-    return "Loading...";
+    return "";
   }
   const onFavoriteToggle = (id: number) => {
-    toggleFavorite(id);
+    // console.log("toggle1");
+    typeof window !== "undefined" && toggleFavorite(id);
+    router.reload();
   };
 
   return (
@@ -54,7 +84,7 @@ function Home({ response }: Props) {
         <NetworkStatus />
         <LastUpdated timestamp={newResponse?.timestamp} />
         <ScoreboardAll
-          games={newResponse?.data?.games as any}
+          games={games as any}
           onFavoriteToggle={onFavoriteToggle}
         />
       </main>

@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import Scoreboard from "@/components/Scoreboard";
 import { GameStatus } from "@/types";
 import { useFavorites } from "hooks/useFavorites";
@@ -7,23 +8,15 @@ interface Props {
 }
 
 export const ScoreboardAll = ({ games, onFavoriteToggle }: Props) => {
-  const [favorites] = useFavorites();
-  console.log({ favorites });
-  const renderGames = (games: GameStatus[]) => {
+  const renderGames = useMemo(() => {
     return games.map((game: GameStatus, i: number) => (
       <Scoreboard
-        teamA={game.awayTeam}
-        teamB={game.homeTeam}
-        scoreA={game.awayTeam.score}
-        scoreB={game.homeTeam.score}
-        isTeamAFavorite={favorites.includes(game.awayTeam.id)}
-        isTeamBFavorite={favorites.includes(game.homeTeam.id)}
+        game={game}
         status={game.statusDisplay}
         key={i}
         onFavoriteToggle={onFavoriteToggle}
       />
     ));
-  };
-
-  return <>{renderGames(games)}</>;
+  }, [games]);
+  return <>{renderGames}</>;
 };

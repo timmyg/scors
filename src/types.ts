@@ -3,6 +3,7 @@ export interface TeamStatus {
   score: number;
   rank: number;
   id: number;
+  isFavorite: boolean;
 }
 export interface GameStatus {
   id: number;

@@ -1,33 +1,32 @@
-import { useLocalStorage } from "hooks/useLocalStorage";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-function toggleFavoriteTeamLocalStorage(teamId: number): number[] {
+async function toggleFavoriteTeamLocalStorage(
+  teamId: number
+): Promise<number[]> {
   const currentFavorites = JSON.parse(
     window.localStorage.getItem("favoriteTeams") || "[]"
   );
 
   if (currentFavorites.includes(teamId)) {
-    console.log("un");
     const updatedFavorites = currentFavorites.filter(
       (fav: number) => fav !== teamId
     );
-    console.log({ updatedFavorites });
-    window.localStorage.setItem(
+    await window.localStorage.setItem(
       "favoriteTeams",
       JSON.stringify(updatedFavorites)
     );
+    return updatedFavorites;
   } else {
-    console.log("add");
     currentFavorites.push(teamId);
     window.localStorage.setItem(
       "favoriteTeams",
       JSON.stringify(currentFavorites)
     );
+    return currentFavorites;
   }
-  return currentFavorites;
 }
 
-export function getFavoriteTeams() {
+function getFavoriteTeamsLocalStorage() {
   return (
     typeof window !== "undefined" &&
     JSON.parse(window.localStorage.getItem("favoriteTeams") || "[]")
@@ -35,24 +34,26 @@ export function getFavoriteTeams() {
 }
 
 export function useFavorites(): [
-  number[],
-  (teamId: number) => void
-  //   (teamId: number) => void
+  (teamId: number) => void,
+  { favorites: number[] }
 ] {
-  // const [favorites, setFavorites] = useLocalStorage("favoriteTeams", []);
-  const [favorites, setFavorites] = useState<number[]>(getFavoriteTeams());
+  const [favorites, setFavorites] = useState<number[]>(
+    getFavoriteTeamsLocalStorage()
+  );
 
-  const toggleFavorite = (teamId: number) => {
+  const toggleFavorite = async (teamId: number) => {
     if (favorites.includes(teamId)) {
-      const newFavorites = toggleFavoriteTeamLocalStorage(teamId);
-      console.log("un", { newFavorites });
+      const newFavorites = await toggleFavoriteTeamLocalStorage(teamId);
       setFavorites([...newFavorites]);
     } else {
-      const newFavorites = toggleFavoriteTeamLocalStorage(teamId);
-      // console.log("add", { newFavorites });
-      // setFavorites(newFavorites);
+      const newFavorites = await toggleFavoriteTeamLocalStorage(teamId);
+      setFavorites([...newFavorites]);
     }
   };
 
-  return [favorites, toggleFavorite];
+  useEffect(() => {
+    setFavorites(getFavoriteTeamsLocalStorage());
+  }, []);
+
+  return [toggleFavorite, { favorites }];
 }

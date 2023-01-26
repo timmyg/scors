@@ -1,33 +1,26 @@
-import { TeamStatus } from "@/types";
+import { GameStatus, TeamStatus } from "@/types";
+import { useEffect } from "react";
 import { AiFillStar } from "react-icons/ai";
 
 interface Props {
-  teamA: TeamStatus;
-  teamB: TeamStatus;
-  scoreA: number;
-  scoreB: number;
-  isTeamAFavorite: boolean;
-  isTeamBFavorite: boolean;
+  game: GameStatus;
   status: string;
   onFavoriteToggle: (id: number) => void;
 }
 
-const Scoreboard = ({
-  teamA,
-  teamB,
-  scoreA,
-  scoreB,
-  isTeamAFavorite,
-  isTeamBFavorite,
-  status,
-  onFavoriteToggle,
-}: Props) => {
+const Scoreboard = ({ game, status, onFavoriteToggle }: Props) => {
+  console.log("scoreboard", game.awayTeam.isFavorite, game.homeTeam.isFavorite);
+  const teamA = game.awayTeam;
+  const teamB = game.homeTeam;
+  const scoreA = game.awayTeam.score;
+  const scoreB = game.homeTeam.score;
   const getRankString = (team: TeamStatus): string => {
     if (team.rank) {
       return `(${team.rank}) `;
     }
     return "";
   };
+
   return (
     <div className="bg-gray-800 p-4 rounded-lg m-4">
       <div className="flex">
@@ -40,7 +33,7 @@ const Scoreboard = ({
             >
               {`${getRankString(teamA)} ${teamA.name}`}
             </div>
-            {isTeamAFavorite && (
+            {game.awayTeam.isFavorite && (
               <div className="ml-2">
                 <AiFillStar className="text-xl" />
               </div>
@@ -52,7 +45,7 @@ const Scoreboard = ({
               title="Click to favorite"
               onClick={() => onFavoriteToggle(teamB.id)}
             >{`${getRankString(teamB)} ${teamB.name}`}</div>
-            {isTeamBFavorite && (
+            {game.homeTeam.isFavorite && (
               <div className="ml-2">
                 <AiFillStar className="text-xl" />
               </div>
