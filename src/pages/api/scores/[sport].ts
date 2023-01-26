@@ -3,8 +3,11 @@ import { VercelRequest, VercelResponse } from "@vercel/node";
 import wretch from "wretch";
 
 export default async function (req: VercelRequest, res: VercelResponse) {
-  const actionNetworkEndpoint =
-    "https://api.actionnetwork.com/web/v1/scoreboard/ncaab?bookIds=15&division=D1&tournament=0&period=game";
+  const sport: string = req.query.sport as string;
+  if (["ncaab", "nfl", "nba"].indexOf(sport) === -1) {
+    return res.status(400).json({ message: "Invalid sport" });
+  }
+  const actionNetworkEndpoint = `https://api.actionnetwork.com/web/v1/scoreboard/${sport}?bookIds=15&period=game`;
   const response: any = await wretch(actionNetworkEndpoint)
     .headers({
       "Content-Type": "application/json",

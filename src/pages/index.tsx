@@ -3,8 +3,8 @@ import wretch from "wretch";
 import { GetServerSidePropsContext } from "next";
 import { GameStatus, TeamStatus } from "@/types";
 import { ThemeProvider } from "next-themes";
-import { NetworkStatus } from "@/components/networkStatus";
-import { Scoreboard } from "@/components/scoreboard";
+import { NetworkStatus } from "@/components/NetworkStatus";
+import { ScoreboardAll } from "@/components/ScoreboardAll";
 import useSWR from "swr";
 import { useEffect, useState } from "react";
 
@@ -26,14 +26,17 @@ interface Props {
   response: Response;
 }
 
-function Home({ response }: Props) {
-  // const { data, error } = useSWR(`/api/scores`, fetch, { initialGames });
-  // const [tick, setTick] = useState(0);
+const sport = "nba";
 
-  const { data: newResponse, timestamp }: any = useSWR("/api/scores", fetcher, {
-    initialData: response,
-    refreshInterval: 5000,
-  });
+function Home({ response }: Props) {
+  const { data: newResponse, timestamp }: any = useSWR(
+    `/api/scores/${sport}`,
+    fetcher,
+    {
+      initialData: response,
+      refreshInterval: 5000,
+    }
+  );
   console.log({ newResponse, timestamp });
 
   // useEffect(() => {
@@ -51,7 +54,7 @@ function Home({ response }: Props) {
       <main className={inter.className}>
         <NetworkStatus />
         <p>{newResponse?.timestamp}</p>
-        <Scoreboard games={newResponse?.data?.games as any} />
+        <ScoreboardAll games={newResponse?.data?.games as any} />
       </main>
     </ThemeProvider>
   );
@@ -63,11 +66,14 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     const baseUrl = context.req
       ? `${protocol}://${context.req.headers.host}`
       : "";
-    const response: any = await wretch(`${baseUrl}/api/scores`).get().json();
-    // return { props: { initialGames: response.data.games, initialTimestamp } };
+    const response: any = await wretch(`${baseUrl}/api/scores/${sport}`)
+      .get()
+      .json();
     return { props: { response } };
   } catch (e) {
     console.error({ e });
+    // throw new Error("Error fetching data");
+    return { props: { response: {} } };
   }
 }
 

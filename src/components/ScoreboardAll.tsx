@@ -4,7 +4,7 @@ interface Props {
   games: GameStatus[];
 }
 
-export const Scoreboard = ({ games }: Props) => {
+export const ScoreboardAll = ({ games }: Props) => {
   const getRankString = (team: TeamStatus): string => {
     if (team.rank) {
       return `(${team.rank}) `;
