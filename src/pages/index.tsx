@@ -8,6 +8,7 @@ import { ScoreboardAll } from "@/components/ScoreboardAll";
 import { NetworkStatus } from "@/components/StatusNetwork";
 import { SportsPicker } from "@/components/SportsPicker";
 import { LastUpdated } from "@/components/LastUpdated";
+import { useFavorites } from "hooks/useFavorites";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -38,9 +39,13 @@ function Home({ response }: Props) {
       refreshInterval: 5000,
     }
   );
+  const [_, toggleFavorite] = useFavorites();
   if (!newResponse) {
     return "Loading...";
   }
+  const onFavoriteToggle = (id: number) => {
+    toggleFavorite(id);
+  };
 
   return (
     <ThemeProvider attribute="class">
@@ -48,7 +53,10 @@ function Home({ response }: Props) {
         <SportsPicker />
         <NetworkStatus />
         <LastUpdated timestamp={newResponse?.timestamp} />
-        <ScoreboardAll games={newResponse?.data?.games as any} />
+        <ScoreboardAll
+          games={newResponse?.data?.games as any}
+          onFavoriteToggle={onFavoriteToggle}
+        />
       </main>
     </ThemeProvider>
   );

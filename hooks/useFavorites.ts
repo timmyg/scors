@@ -1,10 +1,18 @@
 import { useLocalStorage } from "hooks/useLocalStorage";
 
-function toggleFavoriteTeam(teamId: number) {
+function toggleFavoriteTeamLocalStorage(teamId: number) {
   const currentFavorites = JSON.parse(
     window.localStorage.getItem("favoriteTeams") || "[]"
   );
-  if (!currentFavorites.includes(teamId)) {
+  if (currentFavorites.includes(teamId)) {
+    const updatedFavorites = currentFavorites.filter(
+      (fav: number) => fav !== teamId
+    );
+    window.localStorage.setItem(
+      "favoriteTeams",
+      JSON.stringify(updatedFavorites)
+    );
+  } else {
     currentFavorites.push(teamId);
     window.localStorage.setItem(
       "favoriteTeams",
@@ -13,24 +21,11 @@ function toggleFavoriteTeam(teamId: number) {
   }
 }
 
-function unfavoriteTeam(teamId: number) {
-  const currentFavorites = JSON.parse(
-    window.localStorage.getItem("favoriteTeams") || "[]"
-  );
-  const updatedFavorites = currentFavorites.filter(
-    (fav: number) => fav !== teamId
-  );
-  window.localStorage.setItem(
-    "favoriteTeams",
-    JSON.stringify(updatedFavorites)
-  );
-}
-
 export function getFavoriteTeams() {
   return JSON.parse(window.localStorage.getItem("favoriteTeams") || "[]");
 }
 
-export function useFavoritedTeams(): [
+export function useFavorites(): [
   number[],
   (teamId: number) => void
   //   (teamId: number) => void
@@ -40,20 +35,12 @@ export function useFavoritedTeams(): [
   const toggleFavorite = (teamId: number) => {
     if (favorites.includes(teamId)) {
       setFavorites(favorites.filter((fav: number) => fav !== teamId));
-      unfavoriteTeam(teamId);
+      toggleFavoriteTeamLocalStorage(teamId);
     } else {
       setFavorites([...favorites, teamId]);
-      toggleFavoriteTeam(teamId);
+      toggleFavoriteTeamLocalStorage(teamId);
     }
   };
-  //   const unfavorite = (teamId: number) => {
-  //     setFavorites(favorites.filter((fav: number) => fav !== teamId));
-  //     unfavoriteTeam(teamId);
-  //   };
 
-  return [
-    favorites,
-    toggleFavorite,
-    // unfavorite
-  ];
+  return [favorites, toggleFavorite];
 }

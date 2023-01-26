@@ -25,11 +25,13 @@ export default async function (req: VercelRequest, res: VercelResponse) {
         name: awayTeam.display_name,
         score: game.boxscore?.total_away_points || 0,
         rank: game.ranks?.find((t: any) => t.team_id === awayTeam.id)?.rank,
+        id: awayTeam.id,
       },
       homeTeam: {
         name: homeTeam.display_name,
         score: game.boxscore?.total_home_points || 0,
         rank: game.ranks?.find((t: any) => t.team_id === homeTeam.id)?.rank,
+        id: homeTeam.id,
       },
     } as GameStatus;
   });

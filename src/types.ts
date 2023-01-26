@@ -2,6 +2,7 @@ export interface TeamStatus {
   name: string;
   score: number;
   rank: number;
+  id: number;
 }
 export interface GameStatus {
   id: number;
