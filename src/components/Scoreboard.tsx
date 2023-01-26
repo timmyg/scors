@@ -1,3 +1,5 @@
+import { AiFillStar } from "react-icons/ai";
+
 interface Props {
   teamA: string;
   teamB: string;
@@ -11,8 +13,18 @@ const Scoreboard = ({ teamA, teamB, scoreA, scoreB, status }: Props) => {
     <div className="bg-gray-800 p-4 rounded-lg m-4">
       <div className="flex">
         <div className="w-3/5">
-          <div className="text-xl">{teamA}</div>
-          <div className="text-xl">{teamB}</div>
+          <div className="flex items-center">
+            <div className="text-xl">{teamA}</div>
+            <div className="ml-2">
+              <AiFillStar className="text-xl" />
+            </div>
+          </div>
+          <div className="flex items-center">
+            <div className="text-xl">{teamB}</div>
+            <div className="ml-2">
+              <AiFillStar className="text-xl" />
+            </div>
+          </div>
         </div>
         <div className="w-1/5">
           <div className="text-xl">{scoreA}</div>

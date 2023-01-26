@@ -1,4 +1,4 @@
-import Scoreboard from "@/atoms/Scoreboard";
+import Scoreboard from "@/components/Scoreboard";
 import { GameStatus, TeamStatus } from "@/types";
 
 interface Props {
