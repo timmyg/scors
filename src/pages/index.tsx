@@ -1,11 +1,13 @@
 import { Inter } from "@next/font/google";
 import wretch from "wretch";
 import { GetServerSidePropsContext } from "next";
-import { GameStatus, TeamStatus } from "@/types";
+import { GameStatus } from "@/types";
 import { ThemeProvider } from "next-themes";
 import { NetworkStatus } from "@/components/NetworkStatus";
 import { ScoreboardAll } from "@/components/ScoreboardAll";
 import useSWR from "swr";
+import { SportsPicker } from "@/components/SportsPicker";
+import { LastUpdated } from "@/components/LastUpdated";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -43,8 +45,9 @@ function Home({ response }: Props) {
   return (
     <ThemeProvider attribute="class">
       <main className={inter.className}>
+        <SportsPicker />
         <NetworkStatus />
-        <p>{newResponse?.timestamp}</p>
+        <LastUpdated timestamp={newResponse?.timestamp} />
         <ScoreboardAll games={newResponse?.data?.games as any} />
       </main>
     </ThemeProvider>

@@ -10,6 +10,7 @@ specifiers:
   '@types/react-dom': 18.0.10
   '@vercel/node': 2.8.6
   autoprefixer: 10.4.13
+  date-fns: 2.29.3
   eslint: 8.31.0
   eslint-config-next: 13.1.2
   i: 0.3.7
@@ -35,6 +36,7 @@ dependencies:
   '@types/react-adaptive-hooks': 0.0.1
   '@types/react-dom': 18.0.10
   '@vercel/node': 2.8.6
+  date-fns: 2.29.3
   eslint: 8.31.0
   eslint-config-next: 13.1.2_iukboom6ndih5an6iafl45j2fe
   i: 0.3.7
@@ -986,6 +988,11 @@ packages:
 
   /damerau-levenshtein/1.0.8:
     resolution: {integrity: sha512-sdQSFB7+llfUcQHUQO3+B8ERRj0Oa4w9POWMI/puGtuf7gFywGmkaLCElnudfTiKZV+NvHqL0ifzdrI8Ro7ESA==}
+    dev: false
+
+  /date-fns/2.29.3:
+    resolution: {integrity: sha512-dDCnyH2WnnKusqvZZ6+jA1O51Ibt8ZMRNkDZdyAyK4YfbDwa/cEmuztzG5pk6hqlp9aSBPYcjOlktquahGwGeA==}
+    engines: {node: '>=0.11'}
     dev: false
 
   /debug/3.2.7:
