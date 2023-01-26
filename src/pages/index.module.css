@@ -18,6 +18,14 @@
   font-family: var(--font-mono);
 }
 
+.active {
+  font-weight: bold;
+}
+
+.inactive {
+  opacity: 0.6;
+}
+
 .description a {
   display: flex;
   align-items: center;
