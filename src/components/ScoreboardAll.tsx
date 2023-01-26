@@ -1,7 +1,8 @@
 import { useMemo } from "react";
 import Scoreboard from "@/components/Scoreboard";
 import { GameStatus } from "@/types";
-import { useFavorites } from "hooks/useFavorites";
+import { formatDistance } from "date-fns";
+
 interface Props {
   games: GameStatus[];
   onFavoriteToggle: (id: number) => void;
@@ -12,7 +13,10 @@ export const ScoreboardAll = ({ games, onFavoriteToggle }: Props) => {
     return games.map((game: GameStatus, i: number) => (
       <Scoreboard
         game={game}
-        status={game.statusDisplay}
+        status={
+          game.statusDisplay ||
+          `Starts in ${formatDistance(new Date(game.startTime), new Date())}`
+        }
         key={i}
         onFavoriteToggle={onFavoriteToggle}
       />

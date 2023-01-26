@@ -17,9 +17,11 @@ export default async function (req: VercelRequest, res: VercelResponse) {
     .json();
   const games: GameStatus[] = response.games.map((game: any) => {
     const [awayTeam, homeTeam] = game.teams;
+    console.log({ game });
     return {
       id: game.id,
       statusDisplay: game.status_display,
+      startTime: game.start_time,
       statusId: game.status.toLowerCase(),
       awayTeam: {
         name: awayTeam.display_name,

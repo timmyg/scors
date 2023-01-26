@@ -9,13 +9,12 @@ interface Link {
 }
 
 const links: Link[] = [
-  { label: "nba", href: "/nba" },
   { label: "ncaab", href: "/ncaab" },
   { label: "nfl", href: "/nfl" },
+  { label: "nba", href: "/nba" },
   { label: "nhl", href: "/nhl" },
-  //   { label: "nhl", href: "#nhl", disabled: true },
   { label: "soccer", href: "/soccer" },
-  //   { label: "mlb", href: "#mlb", disabled: true },
+  // { label: "mlb", href: "/mlb" },
 ];
 
 export const SportsPicker = () => {

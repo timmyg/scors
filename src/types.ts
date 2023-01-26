@@ -10,6 +10,7 @@ export interface GameStatus {
   name: string;
   statusId: string;
   statusDisplay: string;
+  startTime: string;
   awayTeam: TeamStatus;
   homeTeam: TeamStatus;
 }
