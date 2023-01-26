@@ -1,5 +1,4 @@
 import { TeamStatus } from "@/types";
-import { useFavorites } from "hooks/useFavorites";
 import { AiFillStar } from "react-icons/ai";
 
 interface Props {
@@ -7,6 +6,8 @@ interface Props {
   teamB: TeamStatus;
   scoreA: number;
   scoreB: number;
+  isTeamAFavorite: boolean;
+  isTeamBFavorite: boolean;
   status: string;
   onFavoriteToggle: (id: number) => void;
 }
@@ -16,17 +17,17 @@ const Scoreboard = ({
   teamB,
   scoreA,
   scoreB,
+  isTeamAFavorite,
+  isTeamBFavorite,
   status,
   onFavoriteToggle,
 }: Props) => {
-  const [favorites] = useFavorites();
   const getRankString = (team: TeamStatus): string => {
     if (team.rank) {
       return `(${team.rank}) `;
     }
     return "";
   };
-  console.log(favorites);
   return (
     <div className="bg-gray-800 p-4 rounded-lg m-4">
       <div className="flex">
@@ -39,7 +40,7 @@ const Scoreboard = ({
             >
               {`${getRankString(teamA)} ${teamA.name}`}
             </div>
-            {favorites.includes(teamA.id) && (
+            {isTeamAFavorite && (
               <div className="ml-2">
                 <AiFillStar className="text-xl" />
               </div>
@@ -51,7 +52,7 @@ const Scoreboard = ({
               title="Click to favorite"
               onClick={() => onFavoriteToggle(teamB.id)}
             >{`${getRankString(teamB)} ${teamB.name}`}</div>
-            {favorites.includes(teamB.id) && (
+            {isTeamBFavorite && (
               <div className="ml-2">
                 <AiFillStar className="text-xl" />
               </div>
