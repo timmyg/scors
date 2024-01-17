@@ -2,7 +2,7 @@ import { GameStatus } from "@/types";
 import { VercelRequest, VercelResponse } from "@vercel/node";
 import wretch from "wretch";
 
-export default async function (req: VercelRequest, res: VercelResponse) {
+export default async function sport(req: VercelRequest, res: VercelResponse) {
   const sport: string = req.query.sport as string;
   if (["ncaab", "nfl", "nba", "nhl", "soccer"].indexOf(sport) === -1) {
     return res.status(400).json({ message: "Invalid sport" });
@@ -17,7 +17,7 @@ export default async function (req: VercelRequest, res: VercelResponse) {
     .json();
   const games: GameStatus[] = response.games.map((game: any) => {
     const [awayTeam, homeTeam] = game.teams;
-    console.log({ game });
+    // console.log({ game });
     return {
       id: game.id,
       statusDisplay: game.status_display,
