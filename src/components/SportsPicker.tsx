@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import styles from "../pages/index.module.css";
+// import styles from "../pages/index.module.css";
 
 interface Link {
   label: string;
@@ -30,10 +30,10 @@ export const SportsPicker = () => {
             style={{
               fontSize: "3xl",
               marginRight: "16px",
-              color:
-                router.asPath == "/" + link.label
-                  ? styles.active
-                  : styles.inactive,
+              // color:
+              // router.asPath == "/" + link.label
+              //   ? styles.active
+              //   : styles.inactive,
             }}
             // disabled={link.disabled || false}
             key={link.href}
