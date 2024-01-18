@@ -69,6 +69,7 @@ export default async function sport(req: VercelRequest, res: VercelResponse) {
     ),
   };
 
+  // test
   const gamesSorted = [
     ...gamesGrouped.inProgress,
     ...gamesGrouped.scheduled,
