@@ -4,6 +4,7 @@ export interface TeamStatus {
   rank: number;
   id: number;
   isFavorite: boolean;
+  conferenceType: string;
 }
 export interface GameStatus {
   id: number;

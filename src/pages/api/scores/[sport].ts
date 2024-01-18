@@ -7,7 +7,7 @@ export default async function sport(req: VercelRequest, res: VercelResponse) {
   if (["ncaab", "nfl", "nba", "nhl", "soccer"].indexOf(sport) === -1) {
     return res.status(400).json({ message: "Invalid sport" });
   }
-  const actionNetworkEndpoint = `https://api.actionnetwork.com/web/v1/scoreboard/${sport}?bookIds=15&period=game`;
+  const actionNetworkEndpoint = `https://api.actionnetwork.com/web/v1/scoreboard/${sport}?bookIds=15&period=game&division=D1`;
   const response: any = await wretch(actionNetworkEndpoint)
     .headers({
       "Content-Type": "application/json",
@@ -15,6 +15,7 @@ export default async function sport(req: VercelRequest, res: VercelResponse) {
     })
     .get()
     .json();
+  // console.log({ games: response.games });
   const games: GameStatus[] = response.games.map((game: any) => {
     const [awayTeam, homeTeam] = game.teams;
     // console.log({ game });
@@ -38,12 +39,32 @@ export default async function sport(req: VercelRequest, res: VercelResponse) {
     } as GameStatus;
   });
 
+  const search = req.query.search as string;
+
+  // Filter the games if there is a search term
+  let filteredGames = games;
+  if (search) {
+    filteredGames = games.filter((game) => {
+      // Check if the search term is in the team names or conference type
+      return (
+        game.awayTeam.name.toLowerCase().includes(search.toLowerCase()) ||
+        game.homeTeam.name.toLowerCase().includes(search.toLowerCase()) ||
+        game.awayTeam.conferenceType
+          ?.toLowerCase()
+          .includes(search.toLowerCase()) ||
+        game.homeTeam.conferenceType
+          ?.toLowerCase()
+          .includes(search.toLowerCase())
+      );
+    });
+  }
+
   // sort by in-progress, then scheduled, then the rest
   const gamesGrouped = {
-    inProgress: games.filter((g) => g.statusId === "in_progress"),
-    scheduled: games.filter((g) => g.statusId === "scheduled"),
-    completed: games.filter((g) => g.statusId === "complete"),
-    others: games.filter(
+    inProgress: filteredGames.filter((g) => g.statusId === "in_progress"),
+    scheduled: filteredGames.filter((g) => g.statusId === "scheduled"),
+    completed: filteredGames.filter((g) => g.statusId === "complete"),
+    others: filteredGames.filter(
       (g) => !["in_progress", "scheduled", "complete"].includes(g.statusId)
     ),
   };

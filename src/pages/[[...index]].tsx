@@ -11,6 +11,7 @@ import { LastUpdated } from "@/components/LastUpdated";
 import { useFavorites } from "hooks/useFavorites";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import Search from "@/components/Search";
 
 // import "./global.css";
 
@@ -82,11 +83,17 @@ function Home({ response, initialSport }: Props) {
     router.reload();
   };
 
+  const handleSearchResults = (searchedGames: GameStatus[]) => {
+    console.log(searchedGames);
+    setGames(searchedGames);
+  };
+
   return (
     <ThemeProvider attribute="class">
       <main className={inter.className}>
         <SportsPicker />
         <NetworkStatus />
+        <Search initialSport={initialSport} onSearch={handleSearchResults} />
         <LastUpdated timestamp={newResponse?.timestamp} />
         <div className="scoreboard-wrapper">
           <ScoreboardAll
