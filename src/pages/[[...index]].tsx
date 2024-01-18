@@ -1,6 +1,6 @@
 import wretch from "wretch";
 import useSWR from "swr";
-import { Inter } from "@next/font/google";
+// import { Inter } from "@next/font/google";
 import { GetServerSidePropsContext } from "next";
 import { GameStatus, TeamStatus } from "@/types";
 import { ThemeProvider } from "next-themes";
@@ -15,7 +15,7 @@ import Search from "@/components/Search";
 
 // import "./global.css";
 
-const inter = Inter({ subsets: ["latin"] });
+// const inter = Inter({ subsets: ["latin"] });
 
 const fetcher = async (url: string) => {
   const response = await wretch(url).get().json();
@@ -90,7 +90,9 @@ function Home({ response, initialSport }: Props) {
 
   return (
     <ThemeProvider attribute="class">
-      <main className={inter.className}>
+      <main
+      // className={inter.className}
+      >
         <SportsPicker />
         <NetworkStatus />
         <Search initialSport={initialSport} onSearch={handleSearchResults} />
