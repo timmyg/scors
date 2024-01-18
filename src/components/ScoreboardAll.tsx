@@ -15,12 +15,16 @@ export const ScoreboardAll = ({ games, onFavoriteToggle }: Props) => {
         game={game}
         status={
           game.statusDisplay ||
-          `Starts in ${formatDistance(new Date(game.startTime), new Date())}`
+          new Date(game.startTime).toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+            timeZoneName: "short",
+          })
         }
         key={i}
         onFavoriteToggle={onFavoriteToggle}
       />
     ));
-  }, [games]);
+  }, [games, onFavoriteToggle]);
   return <>{renderGames}</>;
 };

@@ -6,8 +6,8 @@ interface Props {
 
 export const LastUpdated = (props: Props) => {
   return (
-    <p className="px-4 text-sm">
+    <span style={{ padding: "1rem", fontSize: "0.875rem" }}>
       updated <TimeAgo timestamp={props?.timestamp} />
-    </p>
+    </span>
   );
 };

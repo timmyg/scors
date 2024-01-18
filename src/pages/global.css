@@ -1,0 +1,22 @@
+.scoreboard-wrapper {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .scoreboard-wrapper {
+    display: flex;
+  }
+}
+
+/* Light theme styles */
+.scoreboard-container {
+  background-color: #fafafa; /* Light gray background */
+  color: #1a202c; /* Dark text for light theme */
+  /* ... */
+}
+
+/* Dark theme styles */
+body.dark .scoreboard-container {
+  background-color: #2d3748; /* Darker background for dark theme */
+  color: #e2e8f0; /* Lighter text for dark theme */
+}

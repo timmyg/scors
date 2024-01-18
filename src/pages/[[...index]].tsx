@@ -12,6 +12,8 @@ import { useFavorites } from "hooks/useFavorites";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
+// import "./global.css";
+
 const inter = Inter({ subsets: ["latin"] });
 
 const fetcher = async (url: string) => {
@@ -70,7 +72,7 @@ function Home({ response, initialSport }: Props) {
       );
       setGames(sortedGames);
     }
-  }, [newResponse?.data?.games]);
+  }, [newResponse?.data?.games, favorites]);
   if (!newResponse) {
     return "";
   }
@@ -86,10 +88,12 @@ function Home({ response, initialSport }: Props) {
         <SportsPicker />
         <NetworkStatus />
         <LastUpdated timestamp={newResponse?.timestamp} />
-        <ScoreboardAll
-          games={games as any}
-          onFavoriteToggle={onFavoriteToggle}
-        />
+        <div className="scoreboard-wrapper">
+          <ScoreboardAll
+            games={games as any}
+            onFavoriteToggle={onFavoriteToggle}
+          />
+        </div>
       </main>
     </ThemeProvider>
   );

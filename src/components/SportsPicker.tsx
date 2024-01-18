@@ -21,17 +21,20 @@ export const SportsPicker = () => {
   const router = useRouter();
   console.log(router.asPath);
   return (
-    <div className="overflow-x-scroll h-3xl p-4">
-      <div className="flex">
+    <div style={{ overflowX: "scroll", padding: "4px" }}>
+      <div style={{ display: "flex", fontSize: "24px" }}>
         {links.map((link) => (
           <Link
             href={link.href}
             passHref={true}
-            className={`text-3xl mr-4 ${
-              router.asPath == "/" + link.label
-                ? styles.active
-                : styles.inactive
-            }`}
+            style={{
+              fontSize: "3xl",
+              marginRight: "16px",
+              color:
+                router.asPath == "/" + link.label
+                  ? styles.active
+                  : styles.inactive,
+            }}
             // disabled={link.disabled || false}
             key={link.href}
           >

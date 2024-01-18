@@ -22,42 +22,58 @@ const Scoreboard = ({ game, status, onFavoriteToggle }: Props) => {
   };
 
   return (
-    <div className="bg-gray-400 p-4 rounded-lg m-4">
-      <div className="flex">
-        <div className="w-3/5">
-          <div className="flex items-center">
+    <div
+      className="scoreboard-container"
+      style={{
+        // backgroundColor: "#90A4AE",
+        padding: "1rem",
+        borderRadius: "1rem",
+        margin: "1rem",
+        minWidth: "300px",
+      }}
+    >
+      <div style={{ display: "flex" }}>
+        <div style={{ width: "60%" }}>
+          <div style={{ display: "flex", alignItems: "center" }}>
             <div
-              className="text-xl cursor-pointer"
+              style={{ fontSize: "1.25rem", cursor: "pointer" }}
               title="Click to favorite"
               onClick={() => onFavoriteToggle(teamA.id)}
             >
               {`${getRankString(teamA)} ${teamA.name}`}
             </div>
             {game.awayTeam.isFavorite && (
-              <div className="ml-2">
-                <AiFillStar className="text-xl" />
+              <div style={{ marginLeft: "0.5rem" }}>
+                <AiFillStar style={{ fontSize: "1.25rem" }} />
               </div>
             )}
           </div>
-          <div className="flex items-center">
+          <div style={{ display: "flex", alignItems: "center" }}>
             <div
-              className="text-xl cursor-pointer"
+              style={{ fontSize: "1.25rem", cursor: "pointer" }}
               title="Click to favorite"
               onClick={() => onFavoriteToggle(teamB.id)}
             >{`${getRankString(teamB)} ${teamB.name}`}</div>
             {game.homeTeam.isFavorite && (
-              <div className="ml-2">
-                <AiFillStar className="text-xl" />
+              <div style={{ marginLeft: "0.5rem" }}>
+                <AiFillStar style={{ fontSize: "1.25rem" }} />
               </div>
             )}
           </div>
         </div>
-        <div className="w-1/5">
-          <div className="text-xl">{scoreA}</div>
-          <div className="text-xl">{scoreB}</div>
+        <div style={{ width: "20%" }}>
+          <div style={{ fontSize: "1.25rem" }}>{scoreA}</div>
+          <div style={{ fontSize: "1.25rem" }}>{scoreB}</div>
         </div>
-        <div className="w-1/5 flex justify-center items-center">
-          <div className="text-sm ">{status}</div>
+        <div
+          style={{
+            width: "20%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <div style={{ fontSize: "0.875rem" }}>{status}</div>
         </div>
       </div>
     </div>

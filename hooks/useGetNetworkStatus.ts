@@ -1,11 +1,8 @@
 import { useEffect, useState } from "react";
-import { useNetworkStatus } from "react-adaptive-hooks";
 
 export enum NetworkStatusThreshold {
   Offline = "Offline",
-  Bad = "Bad",
-  Decent = "Decent",
-  Great = "Great",
+  Online = "Online",
 }
 
 type NetworkStatusResponse = {
@@ -13,32 +10,33 @@ type NetworkStatusResponse = {
   isLoading: boolean;
 };
 
+const getOnlineStatus = () =>
+  typeof navigator !== "undefined" && typeof navigator.onLine === "boolean"
+    ? navigator.onLine
+    : true;
+
 export const useGetNetworkStatus = (): NetworkStatusResponse => {
-  const { effectiveConnectionType } = useNetworkStatus();
   const [isReady, setIsReady] = useState(false);
   const [status, setStatus] = useState<NetworkStatusThreshold>(
-    NetworkStatusThreshold.Offline
+    getOnlineStatus()
+      ? NetworkStatusThreshold.Online
+      : NetworkStatusThreshold.Offline
   );
 
+  const setOnline = () => setStatus(NetworkStatusThreshold.Online);
+  const setOffline = () => setStatus(NetworkStatusThreshold.Offline);
+
   useEffect(() => {
-    console.log("effectiveConnectionType", effectiveConnectionType);
-    switch (effectiveConnectionType) {
-      case "slow-2g":
-      case "2g":
-        setStatus(NetworkStatusThreshold.Bad);
-        break;
-      case "3g":
-        setStatus(NetworkStatusThreshold.Decent);
-        break;
-      case "4g":
-        setStatus(NetworkStatusThreshold.Great);
-        break;
-      default:
-        setStatus(NetworkStatusThreshold.Offline);
-        break;
-    }
+    window.addEventListener("online", setOnline);
+    window.addEventListener("offline", setOffline);
+
     setIsReady(true);
-  }, [effectiveConnectionType]);
+
+    return () => {
+      window.removeEventListener("online", setOnline);
+      window.removeEventListener("offline", setOffline);
+    };
+  }, []);
 
   return { status, isLoading: isReady };
 };
