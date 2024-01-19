@@ -5,6 +5,7 @@
 @media (min-width: 768px) {
   .scoreboard-wrapper {
     display: flex;
+    flex-flow: wrap;
   }
 }
 
