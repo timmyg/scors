@@ -54,7 +54,7 @@ const Search = ({ initialSport, onSearch }: SearchProps) => {
       <input
         className="search"
         style={{
-          width: "100%", // full width
+          // width: "100%", // full width
           padding: "10px", // bigger
           paddingLeft: "20px",
           borderRadius: "6px", // rounded corners

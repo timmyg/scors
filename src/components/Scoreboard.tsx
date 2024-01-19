@@ -24,11 +24,12 @@ const Scoreboard = ({ game, status, onFavoriteToggle }: Props) => {
   return (
     <div
       className="scoreboard-container"
-      style={{
-        // backgroundColor: "#90A4AE",
-        padding: "1rem",
-        borderRadius: "1rem",
-      }}
+      style={
+        {
+          // padding: "1rem",
+          // borderRadius: "1rem",
+        }
+      }
     >
       <div style={{ display: "flex" }}>
         <div style={{ width: "60%" }}>

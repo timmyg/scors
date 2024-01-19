@@ -22,8 +22,9 @@
     flex-flow: wrap;
   }
   .scoreboard-container {
-    margin: "1rem";
-    width: 25%;
+    /* margin: 1rem; */
+    width: 33%;
+    /* padding: 10px; */
   }
   .search {
     margin: 0 auto;
@@ -37,6 +38,7 @@
 .scoreboard-container {
   color: #1a202c; /* Dark text for light theme */
   border-color: #1a202c; /* Dark text for light theme */
+  border-radius: 0.25rem;
 }
 
 .search {
