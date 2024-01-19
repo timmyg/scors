@@ -7,7 +7,15 @@ export default async function sport(req: VercelRequest, res: VercelResponse) {
   if (["ncaab", "nfl", "nba", "nhl", "soccer"].indexOf(sport) === -1) {
     return res.status(400).json({ message: "Invalid sport" });
   }
-  const actionNetworkEndpoint = `https://api.actionnetwork.com/web/v1/scoreboard/${sport}?bookIds=15&period=game&division=D1`;
+  const actionNetworkURL = new URL(
+    `https://api.actionnetwork.com/web/v1/scoreboard/${sport}`
+  );
+  actionNetworkURL.searchParams.append("bookIds", "15");
+  actionNetworkURL.searchParams.append("period", "game");
+  if (sport === "ncaab") {
+    actionNetworkURL.searchParams.append("division", "D1");
+  }
+  const actionNetworkEndpoint = actionNetworkURL.href;
   const response: any = await wretch(actionNetworkEndpoint)
     .headers({
       "Content-Type": "application/json",

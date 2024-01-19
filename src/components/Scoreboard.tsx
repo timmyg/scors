@@ -28,8 +28,6 @@ const Scoreboard = ({ game, status, onFavoriteToggle }: Props) => {
         // backgroundColor: "#90A4AE",
         padding: "1rem",
         borderRadius: "1rem",
-        margin: "1rem",
-        minWidth: "25%",
       }}
     >
       <div style={{ display: "flex" }}>

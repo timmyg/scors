@@ -39,6 +39,15 @@ const Search = ({ initialSport, onSearch }: SearchProps) => {
 
   return (
     <input
+      style={{
+        width: "100%", // full width
+        padding: "10px", // bigger
+        borderRadius: "6px", // rounded corners
+        fontSize: "16px", // bigger text
+        margin: "1rem",
+        // boxSizing: "border-box", // include padding and border in element's total width and height
+        border: "2px solid lightgray", // border
+      }}
       type="text"
       value={searchTerm}
       onChange={(e) => {

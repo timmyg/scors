@@ -94,15 +94,15 @@ function Home({ response, initialSport }: Props) {
       // className={inter.className}
       >
         <SportsPicker />
-        <NetworkStatus />
+
         <Search initialSport={initialSport} onSearch={handleSearchResults} />
-        <LastUpdated timestamp={newResponse?.timestamp} />
-        <div className="scoreboard-wrapper">
-          <ScoreboardAll
-            games={games as any}
-            onFavoriteToggle={onFavoriteToggle}
-          />
-        </div>
+        {/* <LastUpdated timestamp={newResponse?.timestamp} /> */}
+
+        <ScoreboardAll
+          games={games as any}
+          onFavoriteToggle={onFavoriteToggle}
+        />
+        <NetworkStatus />
       </main>
     </ThemeProvider>
   );

@@ -3,8 +3,15 @@ import { useGetNetworkStatus } from "hooks/useGetNetworkStatus";
 export const NetworkStatus = () => {
   const { status, isLoading } = useGetNetworkStatus();
   return (
-    <span style={{ fontSize: "0.875rem" }}>
+    <div
+      style={{
+        fontSize: "0.875rem",
+        textAlign: "center",
+        paddingTop: "24px",
+        paddingBottom: "12px",
+      }}
+    >
       {isLoading ? `Connection: ${status}` : "..."}
-    </span>
+    </div>
   );
 };

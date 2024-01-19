@@ -16,7 +16,7 @@ export const ScoreboardAll = ({ games, onFavoriteToggle }: Props) => {
         status={
           game.statusDisplay ||
           new Date(game.startTime).toLocaleTimeString([], {
-            hour: "2-digit",
+            hour: "numeric",
             minute: "2-digit",
             timeZoneName: "short",
           })
@@ -26,5 +26,5 @@ export const ScoreboardAll = ({ games, onFavoriteToggle }: Props) => {
       />
     ));
   }, [games, onFavoriteToggle]);
-  return <>{renderGames}</>;
+  return <div className="scoreboard-wrapper">{renderGames}</div>;
 };
