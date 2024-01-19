@@ -14,12 +14,12 @@ const Scoreboard = ({ game, status, onFavoriteToggle }: Props) => {
   const teamB = game.homeTeam;
   const scoreA = game.awayTeam.score;
   const scoreB = game.homeTeam.score;
-  const getRankString = (team: TeamStatus): string => {
-    if (team.rank) {
-      return `(${team.rank}) `;
-    }
-    return "";
-  };
+  // const getRankString = (team: TeamStatus): string => {
+  //   if (team.rank) {
+  //     return `(${team.rank}) `;
+  //   }
+  //   return "";
+  // };
 
   return (
     <div
@@ -39,7 +39,18 @@ const Scoreboard = ({ game, status, onFavoriteToggle }: Props) => {
               title="Click to favorite"
               onClick={() => onFavoriteToggle(teamA.id)}
             >
-              {`${getRankString(teamA)} ${teamA.name}`}
+              {teamA.name}
+              {teamA.rank && (
+                <span
+                  style={{
+                    verticalAlign: "super",
+                    fontSize: "smaller",
+                    paddingLeft: "4px",
+                  }}
+                >
+                  {teamA.rank}
+                </span>
+              )}
             </div>
             {game.awayTeam.isFavorite && (
               <div style={{ marginLeft: "0.5rem" }}>
@@ -52,7 +63,20 @@ const Scoreboard = ({ game, status, onFavoriteToggle }: Props) => {
               style={{ fontSize: "1.25rem", cursor: "pointer" }}
               title="Click to favorite"
               onClick={() => onFavoriteToggle(teamB.id)}
-            >{`${getRankString(teamB)} ${teamB.name}`}</div>
+            >
+              {teamB.name}
+              {teamB.rank && (
+                <span
+                  style={{
+                    verticalAlign: "super",
+                    fontSize: "smaller",
+                    paddingLeft: "4px",
+                  }}
+                >
+                  {teamB.rank}
+                </span>
+              )}
+            </div>
             {game.homeTeam.isFavorite && (
               <div style={{ marginLeft: "0.5rem" }}>
                 <AiFillStar style={{ fontSize: "1.25rem" }} />

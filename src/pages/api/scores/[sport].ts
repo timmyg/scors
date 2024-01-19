@@ -23,10 +23,8 @@ export default async function sport(req: VercelRequest, res: VercelResponse) {
     })
     .get()
     .json();
-  // console.log({ games: response.games });
   const games: GameStatus[] = response.games.map((game: any) => {
     const [awayTeam, homeTeam] = game.teams;
-    // console.log({ game });
     return {
       id: game.id,
       statusDisplay: game.status_display,
@@ -37,12 +35,14 @@ export default async function sport(req: VercelRequest, res: VercelResponse) {
         score: game.boxscore?.total_away_points || 0,
         rank: game.ranks?.find((t: any) => t.team_id === awayTeam.id)?.rank,
         id: awayTeam.id,
+        conferenceName: awayTeam.conference_type, // BIGEAST
       },
       homeTeam: {
         name: homeTeam.display_name,
         score: game.boxscore?.total_home_points || 0,
         rank: game.ranks?.find((t: any) => t.team_id === homeTeam.id)?.rank,
         id: homeTeam.id,
+        conferenceName: homeTeam.conference_type,
       },
     } as GameStatus;
   });
@@ -57,10 +57,10 @@ export default async function sport(req: VercelRequest, res: VercelResponse) {
       return (
         game.awayTeam.name.toLowerCase().includes(search.toLowerCase()) ||
         game.homeTeam.name.toLowerCase().includes(search.toLowerCase()) ||
-        game.awayTeam.conferenceType
+        game.awayTeam.conferenceName
           ?.toLowerCase()
           .includes(search.toLowerCase()) ||
-        game.homeTeam.conferenceType
+        game.homeTeam.conferenceName
           ?.toLowerCase()
           .includes(search.toLowerCase())
       );
