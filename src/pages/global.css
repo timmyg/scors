@@ -8,12 +8,24 @@
 
 .scoreboard-container {
   width: 100%;
+  /* margin-bottom: 1rem; */
+}
+
+.scoreboard-inner {
   border: 2px solid #1a202c;
-  margin-bottom: 1rem;
+  margin: 16px;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.search-wrapper {
+  margin: 12px 0px;
+  padding-left: 16px;
 }
 
 .search {
   border: 2px solid #1a202c;
+  width: 100%;
 }
 
 @media (min-width: 768px) {
@@ -23,7 +35,7 @@
   }
   .scoreboard-container {
     /* margin: 1rem; */
-    width: 33%;
+    width: 33.333%;
     /* padding: 10px; */
   }
   .search {
@@ -31,6 +43,10 @@
     display: block;
     min-width: 400px;
     width: inherit;
+  }
+  .search-wrapper {
+    margin: 0;
+    padding-left: 0;
   }
 }
 
@@ -50,6 +66,9 @@
 html.dark .scoreboard-container {
   /*background-color: #2d3748; /* Darker background for dark theme */
   color: #fafafa; /* Lighter text for dark theme */
+}
+
+html.dark .scoreboard-inner {
   border-color: #fafafa;
 }
 

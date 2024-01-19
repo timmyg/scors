@@ -31,7 +31,7 @@ const Scoreboard = ({ game, status, onFavoriteToggle }: Props) => {
         }
       }
     >
-      <div style={{ display: "flex" }}>
+      <div style={{ display: "flex" }} className="scoreboard-inner">
         <div style={{ width: "60%" }}>
           <div style={{ display: "flex", alignItems: "center" }}>
             <div

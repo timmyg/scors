@@ -38,7 +38,10 @@ const Search = ({ initialSport, onSearch }: SearchProps) => {
   }, [searchTerm, debouncedSearch]);
 
   return (
-    <div style={{ position: "relative", margin: "12px 0" }}>
+    <div
+      style={{ position: "relative", margin: "12px 0" }}
+      // className="search-wrapper"
+    >
       {/* <span
         role="img"
         aria-label="search"

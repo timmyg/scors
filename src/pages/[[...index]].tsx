@@ -91,14 +91,10 @@ function Home({ response, initialSport }: Props) {
 
   return (
     <ThemeProvider attribute="class">
-      <main
-      // className={inter.className}
-      >
+      <main>
         <Header />
         <SportsPicker />
         <Search initialSport={initialSport} onSearch={handleSearchResults} />
-        {/* <LastUpdated timestamp={newResponse?.timestamp} /> */}
-
         <ScoreboardAll
           games={games as any}
           onFavoriteToggle={onFavoriteToggle}
