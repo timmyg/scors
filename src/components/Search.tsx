@@ -38,23 +38,39 @@ const Search = ({ initialSport, onSearch }: SearchProps) => {
   }, [searchTerm, debouncedSearch]);
 
   return (
-    <input
-      style={{
-        width: "100%", // full width
-        padding: "10px", // bigger
-        borderRadius: "6px", // rounded corners
-        fontSize: "16px", // bigger text
-        margin: "1rem",
-        // boxSizing: "border-box", // include padding and border in element's total width and height
-        border: "2px solid lightgray", // border
-      }}
-      type="text"
-      value={searchTerm}
-      onChange={(e) => {
-        setSearchTerm(e.target.value);
-      }}
-      placeholder="Search..."
-    />
+    <div style={{ position: "relative" }}>
+      {/* <span
+        role="img"
+        aria-label="search"
+        style={{
+          position: "absolute",
+          top: "22px",
+          fontSize: "26px",
+          left: "26px",
+        }}
+      >
+        🔍
+      </span> */}
+      <input
+        className="search"
+        style={{
+          width: "100%", // full width
+          padding: "10px", // bigger
+          paddingLeft: "20px",
+          borderRadius: "6px", // rounded corners
+          fontSize: "16px", // bigger text
+          margin: "1rem",
+          // boxSizing: "border-box", // include padding and border in element's total width and height
+          background: "transparent",
+        }}
+        type="text"
+        value={searchTerm}
+        onChange={(e) => {
+          setSearchTerm(e.target.value);
+        }}
+        placeholder="Search..."
+      />
+    </div>
   );
 };
 

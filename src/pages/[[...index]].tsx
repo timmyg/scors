@@ -12,6 +12,7 @@ import { useFavorites } from "hooks/useFavorites";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Search from "@/components/Search";
+import { Header } from "@/components/Header";
 
 // import "./global.css";
 
@@ -93,8 +94,8 @@ function Home({ response, initialSport }: Props) {
       <main
       // className={inter.className}
       >
+        <Header />
         <SportsPicker />
-
         <Search initialSport={initialSport} onSearch={handleSearchResults} />
         {/* <LastUpdated timestamp={newResponse?.timestamp} /> */}
 

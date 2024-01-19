@@ -8,8 +8,12 @@
 
 .scoreboard-container {
   width: 100%;
-  border: 2px solid #e2e8f0;
+  border: 2px solid #1a202c;
   margin-bottom: 1rem;
+}
+
+.search {
+  border: 2px solid #1a202c;
 }
 
 @media (min-width: 768px) {
@@ -25,15 +29,24 @@
 
 /* Light theme styles */
 .scoreboard-container {
-  /* 
-  background-color: #fafafa; /* Light gray background */
-
   color: #1a202c; /* Dark text for light theme */
-  /* ... */
+  border-color: #1a202c; /* Dark text for light theme */
+}
+
+.search {
+  color: #1a202c; /* Dark text for light theme */
+  border-color: #585959; /* Dark text for light theme */
 }
 
 /* Dark theme styles */
 html.dark .scoreboard-container {
   /*background-color: #2d3748; /* Darker background for dark theme */
   color: #fafafa; /* Lighter text for dark theme */
+  border-color: #fafafa;
+}
+
+html.dark .search {
+  /*background-color: #2d3748; /* Darker background for dark theme */
+  color: #fafafa; /* Lighter text for dark theme */
+  border-color: #fafafa;
 }
