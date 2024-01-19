@@ -22,7 +22,14 @@ export const SportsPicker = () => {
   console.log(router.asPath);
   return (
     <div style={{ overflowX: "scroll", padding: "4px" }}>
-      <div style={{ display: "flex", fontSize: "24px" }}>
+      <div
+        style={{
+          display: "flex",
+          fontSize: "24px",
+          marginLeft: "16px",
+          marginRight: "16px",
+        }}
+      >
         {links.map((link) => (
           <Link
             href={link.href}

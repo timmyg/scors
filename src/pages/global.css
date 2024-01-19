@@ -25,7 +25,8 @@
 
 .search {
   border: 2px solid #1a202c;
-  width: 100%;
+  /* width: 100%; */
+  margin: 16px;
 }
 
 @media (min-width: 768px) {
