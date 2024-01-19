@@ -38,7 +38,7 @@ const Search = ({ initialSport, onSearch }: SearchProps) => {
   }, [searchTerm, debouncedSearch]);
 
   return (
-    <div style={{ position: "relative" }}>
+    <div style={{ position: "relative", margin: "12px 0" }}>
       {/* <span
         role="img"
         aria-label="search"
@@ -59,7 +59,7 @@ const Search = ({ initialSport, onSearch }: SearchProps) => {
           paddingLeft: "20px",
           borderRadius: "6px", // rounded corners
           fontSize: "16px", // bigger text
-          margin: "1rem",
+          // margin: "1rem",
           // boxSizing: "border-box", // include padding and border in element's total width and height
           background: "transparent",
         }}

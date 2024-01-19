@@ -25,6 +25,12 @@
     margin: "1rem";
     width: 25%;
   }
+  .search {
+    margin: 0 auto;
+    display: block;
+    min-width: 400px;
+    width: inherit;
+  }
 }
 
 /* Light theme styles */
