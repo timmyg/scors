@@ -38,6 +38,7 @@ const Scoreboard = ({ game, status, onFavoriteToggle }: Props) => {
               display: "flex",
               alignItems: "center",
               fontWeight: teamA.isWinner ? "bold" : "normal",
+              opacity: teamA.isLoser ? .7 : 1
             }}
           >
             <div
@@ -69,6 +70,7 @@ const Scoreboard = ({ game, status, onFavoriteToggle }: Props) => {
               display: "flex",
               alignItems: "center",
               fontWeight: teamB.isWinner ? "bold" : "normal",
+              opacity: teamB.isLoser ? .7 : 1
             }}
           >
             <div
@@ -101,6 +103,7 @@ const Scoreboard = ({ game, status, onFavoriteToggle }: Props) => {
             style={{
               fontSize: "1.25rem",
               fontWeight: teamA.isWinner ? "bold" : "normal",
+              opacity: teamA.isLoser ? .7 : 1
             }}
           >
             {scoreA}
@@ -109,6 +112,7 @@ const Scoreboard = ({ game, status, onFavoriteToggle }: Props) => {
             style={{
               fontSize: "1.25rem",
               fontWeight: teamB.isWinner ? "bold" : "normal",
+              opacity: teamB.isLoser ? .7 : 1
             }}
           >
             {scoreB}
