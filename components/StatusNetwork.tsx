@@ -1,3 +1,5 @@
+"use client";
+
 import { useGetNetworkStatus } from "hooks/useGetNetworkStatus";
 
 export const NetworkStatus = () => {

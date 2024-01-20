@@ -4,6 +4,7 @@ import wretch from "wretch";
 
 export default async function sport(req: VercelRequest, res: VercelResponse) {
   const sport: string = req.query.sport as string;
+  console.log({ sport });
   if (["ncaab", "nfl", "nba", "nhl", "soccer"].indexOf(sport) === -1) {
     return res.status(400).json({ message: "Invalid sport" });
   }

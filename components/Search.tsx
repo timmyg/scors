@@ -1,10 +1,11 @@
+"use client";
 // src/components/Search.tsx
 import { GameStatus } from "@/types";
 import { useState, useEffect, useCallback } from "react";
 
 interface SearchProps {
   initialSport: string;
-  onSearch: (games: GameStatus[]) => void;
+  onSearch?: (games: GameStatus[]) => void;
 }
 
 const Search = ({ initialSport, onSearch }: SearchProps) => {
@@ -42,7 +43,7 @@ const Search = ({ initialSport, onSearch }: SearchProps) => {
         `/api/scores/${initialSport}?search=${searchTerm}`
       );
       const data = await response.json();
-      onSearch(data?.data?.games || []);
+      onSearch?.(data?.data?.games || []);
     };
 
     if (searchTerm) {

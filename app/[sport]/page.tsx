@@ -1,9 +1,9 @@
-"use client";
+// "use client";
 
 import wretch from "wretch";
 import useSWR from "swr";
 import { GameStatus } from "@/types";
-import { ThemeProvider } from "next-themes";
+// import { ThemeProvider } from "next-themes";
 import { ScoreboardAll } from "@/components/ScoreboardAll";
 import { NetworkStatus } from "@/components/StatusNetwork";
 import { SportsPicker } from "@/components/SportsPicker";
@@ -19,48 +19,70 @@ const fetcher = async (url: string) => {
   return response;
 };
 
-interface ResponseGames {
-  games: GameStatus[];
-}
 interface Response {
   data: ResponseGames;
   timestamp: string;
 }
 
+interface ResponseGames {
+  games: GameStatus[];
+}
+// interface Props {
+//   response: Response;
+//   initialSport: string;
+// }
+
 function Home({ params }: { params: { response: any; sport: string } }) {
-  const router = useRouter();
+  // const router = useRouter();
   const initialSport = params.sport as string; // Getting sport from the URL query parameter
+  // const [newResponse, setNewResponse] = useState(params.response);
 
-  const [isLoading, setIsLoading] = useState(false);
-  const { data: newResponse, timestamp }: any = useSWR(
-    `/api/scores/${initialSport}`,
-    fetcher,
-    {
-      initialData: params.response,
-      refreshInterval: 15000,
-    }
-  );
-  const [games, setGames] = useState<GameStatus[]>(
-    newResponse?.data?.games || []
-  );
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await fetch(`/api/scores/${initialSport}`).then(
+  //         (res) => res.json()
+  //       );
+  //       console.log({ response });
+  //       setNewResponse(response);
+  //     } catch (error) {
+  //       console.error("Error fetching data", error);
+  //     }
+  //   };
 
-  const handleSearchResults = useCallback((searchedGames: GameStatus[]) => {
-    setGames(searchedGames);
-  }, []);
+  //   fetchData();
+  //   const intervalId = setInterval(fetchData, 15000);
+
+  //   return () => clearInterval(intervalId);
+  // }, [initialSport]);
+
+  // const [games, setGames] = useState<GameStatus[]>(
+  //   newResponse?.data?.games || []
+  // );
+  const games = [];
+
+  const handleSearchResults = () => {};
+
+  // const handleSearchResults = useCallback((searchedGames: GameStatus[]) => {
+  //   setGames(searchedGames);
+  // }, []);
 
   return (
-    <ThemeProvider attribute="class">
-      <main>
-        <Header />
-        <SportsPicker />
-        <Search initialSport={initialSport} onSearch={handleSearchResults} />
-        <ScoreboardAll
-          games={games as any}
-          // onFavoriteToggle={onFavoriteToggle}
-        />
-        <NetworkStatus />
-      </main>
-    </ThemeProvider>
+    // <ThemeProvider attribute="class">
+    <main>
+      <Header />
+      <SportsPicker />
+      <Search
+        initialSport={initialSport}
+        // onSearch={handleSearchResults}
+      />
+      <ScoreboardAll
+        games={games as any}
+        // onFavoriteToggle={onFavoriteToggle}
+      />
+      <NetworkStatus />
+    </main>
+    // </ThemeProvider>
   );
 }
 
