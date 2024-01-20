@@ -74,14 +74,14 @@ const Search = ({ initialSport, onSearch }: SearchProps) => {
             }}
             placeholder="Search..."
           />
-          {searchTerm && (
+          {/* {searchTerm && (
             <button
               onClick={clearSearch}
               style={{ position: "absolute", right: "10px" }}
             >
               x
             </button>
-          )}
+          )} */}
         </div>
       </div>
     </div>
