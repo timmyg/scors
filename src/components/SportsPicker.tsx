@@ -18,8 +18,7 @@ const links: Link[] = [
 ];
 
 export const SportsPicker = () => {
-  const router = useRouter();
-  console.log(router.asPath);
+  // const router = useRouter();
   return (
     <div style={{ overflowX: "scroll", padding: "4px" }}>
       <div

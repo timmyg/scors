@@ -9,7 +9,15 @@ interface Props {
 }
 
 export const ScoreboardAll = ({ games, onFavoriteToggle }: Props) => {
+  console.log({ games });
   const renderGames = useMemo(() => {
+    if (games.length === 0) {
+      return (
+        <div style={{ textAlign: "center", width: "100%", padding: "24px" }}>
+          <span>No results</span>
+        </div>
+      );
+    }
     return games.map((game: GameStatus, i: number) => (
       <Scoreboard
         game={game}

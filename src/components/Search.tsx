@@ -20,42 +20,69 @@ const Search = ({ initialSport, onSearch }: SearchProps) => {
   };
 
   // Debounced API call
-  const debouncedSearch = useCallback(
-    debounce((term: string) => {
-      fetch(`/api/scores/${initialSport}?search=${term}`)
-        .then((response) => response.json())
-        .then((data) => {
-          onSearch(data?.data?.games || []);
-        });
-    }, 1000),
-    [initialSport, onSearch]
-  );
+  // const debouncedSearch = useCallback(
+  //   debounce((term: string) => {
+  //     fetch(`/api/scores/${initialSport}?search=${term}`)
+  //       .then((response) => response.json())
+  //       .then((data) => {
+  //         onSearch(data?.data?.games || []);
+  //       });
+  //   }, 1000),
+  //   [initialSport, onSearch]
+  // );
 
+  // useEffect(() => {
+  //   if (searchTerm) {
+  //     debouncedSearch(searchTerm);
+  //   }
+  // }, [searchTerm, debouncedSearch]);
   useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch(
+        `/api/scores/${initialSport}?search=${searchTerm}`
+      );
+      const data = await response.json();
+      onSearch(data?.data?.games || []);
+    };
+
     if (searchTerm) {
-      debouncedSearch(searchTerm);
+      fetchData();
     }
-  }, [searchTerm, debouncedSearch]);
+  }, [searchTerm, initialSport]);
+
+  const clearSearch = () => {
+    setSearchTerm("");
+  };
 
   return (
     <div style={{}}>
       <div style={{ display: "flex", flexDirection: "column" }}>
-        <input
-          className="search"
-          style={{
-            padding: "10px", // bigger
-            paddingLeft: "20px",
-            borderRadius: "6px", // rounded corners
-            fontSize: "16px", // bigger text
-            background: "transparent",
-          }}
-          type="text"
-          value={searchTerm}
-          onChange={(e) => {
-            setSearchTerm(e.target.value);
-          }}
-          placeholder="Search..."
-        />
+        <div style={{ display: "relative" }}>
+          <input
+            className="search"
+            style={{
+              padding: "10px", // bigger
+              paddingLeft: "20px",
+              borderRadius: "8px", // rounded corners
+              fontSize: "16px", // bigger text
+              background: "transparent",
+            }}
+            type="text"
+            value={searchTerm}
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+            }}
+            placeholder="Search..."
+          />
+          {searchTerm && (
+            <button
+              onClick={clearSearch}
+              style={{ position: "absolute", right: "10px" }}
+            >
+              x
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );

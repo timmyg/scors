@@ -9,7 +9,7 @@ import { NetworkStatus } from "@/components/StatusNetwork";
 import { SportsPicker } from "@/components/SportsPicker";
 import { LastUpdated } from "@/components/LastUpdated";
 import { useFavorites } from "hooks/useFavorites";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Search from "@/components/Search";
 import { Header } from "@/components/Header";
@@ -38,6 +38,7 @@ interface Props {
 function Home({ response, initialSport }: Props) {
   // console.log("home");
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
   const { data: newResponse, timestamp }: any = useSWR(
     `/api/scores/${initialSport}`,
     fetcher,
@@ -48,7 +49,7 @@ function Home({ response, initialSport }: Props) {
   );
   useEffect(() => {
     const hash = router.asPath.split("#")[1];
-    console.log({ hash });
+    // console.log({ hash });
   }, [router.asPath]);
   const [toggleFavorite, { favorites }] = useFavorites();
   // const [games, setGames] = useState<GameStatus[]>([]);
@@ -75,19 +76,20 @@ function Home({ response, initialSport }: Props) {
       setGames(sortedGames);
     }
   }, [newResponse?.data?.games, favorites]);
-  if (!newResponse) {
-    return "";
-  }
+
   const onFavoriteToggle = (id: number) => {
     // console.log("toggle1");
     typeof window !== "undefined" && toggleFavorite(id);
     router.reload();
   };
 
-  const handleSearchResults = (searchedGames: GameStatus[]) => {
-    console.log(searchedGames);
+  const handleSearchResults = useCallback((searchedGames: GameStatus[]) => {
     setGames(searchedGames);
-  };
+  }, []);
+
+  if (!newResponse) {
+    return "";
+  }
 
   return (
     <ThemeProvider attribute="class">

@@ -9,7 +9,7 @@ interface Props {
 }
 
 const Scoreboard = ({ game, status, onFavoriteToggle }: Props) => {
-  console.log("scoreboard", game.awayTeam.isFavorite, game.homeTeam.isFavorite);
+  // console.log("scoreboard", game.awayTeam.isFavorite, game.homeTeam.isFavorite);
   const teamA = game.awayTeam;
   const teamB = game.homeTeam;
   const scoreA = game.awayTeam.score;
@@ -33,7 +33,13 @@ const Scoreboard = ({ game, status, onFavoriteToggle }: Props) => {
     >
       <div style={{ display: "flex" }} className="scoreboard-inner">
         <div style={{ width: "60%" }}>
-          <div style={{ display: "flex", alignItems: "center" }}>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              fontWeight: teamA.isWinner ? "bold" : "normal",
+            }}
+          >
             <div
               style={{ fontSize: "1.25rem", cursor: "pointer" }}
               title="Click to favorite"
@@ -58,7 +64,13 @@ const Scoreboard = ({ game, status, onFavoriteToggle }: Props) => {
               </div>
             )}
           </div>
-          <div style={{ display: "flex", alignItems: "center" }}>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              fontWeight: teamB.isWinner ? "bold" : "normal",
+            }}
+          >
             <div
               style={{ fontSize: "1.25rem", cursor: "pointer" }}
               title="Click to favorite"
@@ -85,8 +97,22 @@ const Scoreboard = ({ game, status, onFavoriteToggle }: Props) => {
           </div>
         </div>
         <div style={{ width: "20%" }}>
-          <div style={{ fontSize: "1.25rem" }}>{scoreA}</div>
-          <div style={{ fontSize: "1.25rem" }}>{scoreB}</div>
+          <div
+            style={{
+              fontSize: "1.25rem",
+              fontWeight: teamA.isWinner ? "bold" : "normal",
+            }}
+          >
+            {scoreA}
+          </div>
+          <div
+            style={{
+              fontSize: "1.25rem",
+              fontWeight: teamB.isWinner ? "bold" : "normal",
+            }}
+          >
+            {scoreB}
+          </div>
         </div>
         <div
           style={{

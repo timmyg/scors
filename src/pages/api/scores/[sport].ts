@@ -1,4 +1,4 @@
-import { GameStatus } from "@/types";
+import { GameActionNetwork, GameStatus } from "@/types";
 import { VercelRequest, VercelResponse } from "@vercel/node";
 import wretch from "wretch";
 
@@ -23,8 +23,11 @@ export default async function sport(req: VercelRequest, res: VercelResponse) {
     })
     .get()
     .json();
-  const games: GameStatus[] = response.games.map((game: any) => {
+  // console.log("game", JSON.stringify(response.games[0]));
+  const games: GameStatus[] = response.games.map((game: GameActionNetwork) => {
     const [awayTeam, homeTeam] = game.teams;
+    const homePoints = game.boxscore?.total_home_points || 0;
+    const awayPoints = game.boxscore?.total_away_points || 0;
     return {
       id: game.id,
       statusDisplay: game.status_display,
@@ -32,17 +35,19 @@ export default async function sport(req: VercelRequest, res: VercelResponse) {
       statusId: game.status.toLowerCase(),
       awayTeam: {
         name: awayTeam.display_name,
-        score: game.boxscore?.total_away_points || 0,
+        score: awayPoints,
         rank: game.ranks?.find((t: any) => t.team_id === awayTeam.id)?.rank,
         id: awayTeam.id,
-        conferenceName: awayTeam.conference_type, // BIGEAST
+        conferenceId: awayTeam.conference_type, // BIGEAST
+        isWinner: game.status === "complete" && awayPoints > homePoints,
       },
       homeTeam: {
         name: homeTeam.display_name,
-        score: game.boxscore?.total_home_points || 0,
+        score: homePoints,
         rank: game.ranks?.find((t: any) => t.team_id === homeTeam.id)?.rank,
         id: homeTeam.id,
-        conferenceName: homeTeam.conference_type,
+        conferenceId: homeTeam.conference_type,
+        isWinner: game.status === "complete" && homePoints > awayPoints,
       },
     } as GameStatus;
   });
@@ -51,18 +56,17 @@ export default async function sport(req: VercelRequest, res: VercelResponse) {
 
   // Filter the games if there is a search term
   let filteredGames = games;
+  // console.log(games[2]);
   if (search) {
     filteredGames = games.filter((game) => {
       // Check if the search term is in the team names or conference type
       return (
         game.awayTeam.name.toLowerCase().includes(search.toLowerCase()) ||
         game.homeTeam.name.toLowerCase().includes(search.toLowerCase()) ||
-        game.awayTeam.conferenceName
+        game.awayTeam.conferenceId
           ?.toLowerCase()
           .includes(search.toLowerCase()) ||
-        game.homeTeam.conferenceName
-          ?.toLowerCase()
-          .includes(search.toLowerCase())
+        game.homeTeam.conferenceId?.toLowerCase().includes(search.toLowerCase())
       );
     });
   }
