@@ -1,4 +1,4 @@
-import TimeAgo from "@/atoms/TimeAgo";
+import TimeAgo from "./TimeAgo";
 
 interface Props {
   timestamp: string;

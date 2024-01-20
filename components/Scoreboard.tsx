@@ -5,7 +5,7 @@ import { AiFillStar } from "react-icons/ai";
 interface Props {
   game: GameStatus;
   status: string;
-  onFavoriteToggle: (id: number) => void;
+  onFavoriteToggle?: (id: number) => void;
 }
 
 const Scoreboard = ({ game, status, onFavoriteToggle }: Props) => {
@@ -43,7 +43,7 @@ const Scoreboard = ({ game, status, onFavoriteToggle }: Props) => {
             <div
               style={{ fontSize: "1.25rem", cursor: "pointer" }}
               title="Click to favorite"
-              onClick={() => onFavoriteToggle(teamA.id)}
+              onClick={() => onFavoriteToggle?.(teamA.id)}
             >
               {teamA.name}
               {teamA.rank && (
@@ -74,7 +74,7 @@ const Scoreboard = ({ game, status, onFavoriteToggle }: Props) => {
             <div
               style={{ fontSize: "1.25rem", cursor: "pointer" }}
               title="Click to favorite"
-              onClick={() => onFavoriteToggle(teamB.id)}
+              onClick={() => onFavoriteToggle?.(teamB.id)}
             >
               {teamB.name}
               {teamB.rank && (

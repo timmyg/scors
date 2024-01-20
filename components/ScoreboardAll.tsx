@@ -5,7 +5,7 @@ import { formatDistance } from "date-fns";
 
 interface Props {
   games: GameStatus[];
-  onFavoriteToggle: (id: number) => void;
+  onFavoriteToggle?: (id: number) => void;
 }
 
 export const ScoreboardAll = ({ games, onFavoriteToggle }: Props) => {
@@ -30,9 +30,9 @@ export const ScoreboardAll = ({ games, onFavoriteToggle }: Props) => {
           })
         }
         key={i}
-        onFavoriteToggle={onFavoriteToggle}
+        // onFavoriteToggle={onFavoriteToggle}
       />
     ));
-  }, [games, onFavoriteToggle]);
+  }, [games]);
   return <div className="scoreboard-wrapper">{renderGames}</div>;
 };
