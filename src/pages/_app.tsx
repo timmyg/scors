@@ -1,5 +1,6 @@
 import React from "react";
 import { AppProps } from "next/app";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import "./global.css";
 import Head from "next/head";
@@ -21,6 +22,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         />
       </Head>
       <Component {...pageProps} />
+      <SpeedInsights />
     </>
   );
 }
