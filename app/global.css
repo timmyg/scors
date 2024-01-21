@@ -64,16 +64,16 @@
 }
 
 /* Dark theme styles */
-html.dark .scoreboard-container {
+html[data-theme="dark"] .scoreboard-container {
   /*background-color: #2d3748; /* Darker background for dark theme */
   color: #fafafa; /* Lighter text for dark theme */
 }
 
-html.dark .scoreboard-inner {
+html[data-theme="dark"] .scoreboard-inner {
   border-color: #fafafa;
 }
 
-html.dark .search {
+html[data-theme="dark"] .search {
   /*background-color: #2d3748; /* Darker background for dark theme */
   color: #fafafa; /* Lighter text for dark theme */
   border-color: #fafafa;

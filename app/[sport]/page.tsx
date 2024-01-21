@@ -14,9 +14,18 @@ import { useRouter } from "next/navigation";
 import Search from "@/components/Search";
 import { Header } from "@/components/Header";
 
-const fetcher = async (url: string) => {
-  const response = await wretch(url).get().json();
-  return response;
+const getBaseUrl = () => {
+  return process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}`
+    : `http://localhost:4141`;
+};
+
+const fetcher = async (sport: string) => {
+  // console.log({ baseUrl: getBaseUrl() });
+  const response = await wretch(`${getBaseUrl()}/api/scores/${sport}`)
+    .get()
+    .json();
+  return (response as any)?.data?.games || [];
 };
 
 interface Response {
@@ -32,7 +41,7 @@ interface ResponseGames {
 //   initialSport: string;
 // }
 
-function Home({ params }: { params: { response: any; sport: string } }) {
+async function Home({ params }: { params: { response: any; sport: string } }) {
   // const router = useRouter();
   const initialSport = params.sport as string; // Getting sport from the URL query parameter
   // const [newResponse, setNewResponse] = useState(params.response);
@@ -59,7 +68,8 @@ function Home({ params }: { params: { response: any; sport: string } }) {
   // const [games, setGames] = useState<GameStatus[]>(
   //   newResponse?.data?.games || []
   // );
-  const games = [];
+  const games = await fetcher(initialSport);
+  // const games = [];
 
   const handleSearchResults = () => {};
 
