@@ -6,6 +6,7 @@ export interface TeamStatus {
   isFavorite: boolean;
   conferenceId: string;
   isWinner: boolean;
+  isLoser: boolean;
 }
 export interface GameStatus {
   id: number;
