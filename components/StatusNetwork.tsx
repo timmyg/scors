@@ -1,6 +1,6 @@
 "use client";
 
-import { useGetNetworkStatus } from "hooks/useGetNetworkStatus";
+import { useGetNetworkStatus } from "@/hooks/useGetNetworkStatus";
 
 export const NetworkStatus = () => {
   const { status, isLoading } = useGetNetworkStatus();

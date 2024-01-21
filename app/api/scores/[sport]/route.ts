@@ -53,6 +53,7 @@ export async function GET(req: NextRequest, { params }: any) {
         id: awayTeam.id,
         conferenceId: awayTeam.conference_type, // BIGEAST
         isWinner: game.status === "complete" && awayPoints > homePoints,
+        isLoser: game.status === "complete" && homePoints > awayPoints,
       },
       homeTeam: {
         name: homeTeam.display_name,
@@ -61,6 +62,7 @@ export async function GET(req: NextRequest, { params }: any) {
         id: homeTeam.id,
         conferenceId: homeTeam.conference_type,
         isWinner: game.status === "complete" && homePoints > awayPoints,
+        isLoser: game.status === "complete" && awayPoints > homePoints,
       },
     } as GameStatus;
   });

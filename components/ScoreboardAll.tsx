@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import Scoreboard from "@/components/Scoreboard";
 import { GameStatus } from "@/types";
-import { formatDistance } from "date-fns";
+// import { formatDistance } from "date-fns";
 
 interface Props {
   games: GameStatus[];
