@@ -98,7 +98,7 @@ async function Home({ params }: { params: { response: any; sport: string } }) {
 
 // With App Router, getServerSideProps can be replaced with a loader function
 // For example:
-async function loader({ params }) {
+async function loader({ params }: { params: { sport: string } }) {
   try {
     const sportFromUrl = params.sport;
     if (!sportFromUrl) {
