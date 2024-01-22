@@ -1,5 +1,4 @@
 import { Providers } from "./providers";
-
 import "./global.css";
 
 export const metadata = {
@@ -23,12 +22,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={catamaran.className}>
-      <PHProvider>
-        <body>
-          <PostHogPageview />
-          <Providers>{children}</Providers>
-        </body>
-      </PHProvider>
+      <body>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }

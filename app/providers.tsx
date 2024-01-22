@@ -7,6 +7,7 @@ import { ReactNode } from "react";
 
 import posthog from "posthog-js";
 import { PostHogProvider } from "posthog-js/react";
+import PostHogPageView from "./PostHogPageview";
 
 const posthogKey =
   process.env.NEXT_PUBLIC_POSTHOG_KEY ||
@@ -21,6 +22,7 @@ if (typeof window !== "undefined") {
 export function Providers({ children }: { children: ReactNode }) {
   return (
     <PostHogProvider client={posthog}>
+      <PostHogPageView />
       <ThemeProvider>{children}</ThemeProvider>
     </PostHogProvider>
   );
