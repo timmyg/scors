@@ -15,6 +15,7 @@ export const fetcher = async ({
 }) => {
   // console.log({ baseUrl: getBaseUrl() });
   const response = await wretch(`${getBaseUrl()}/api/scores/${sport}`)
+    .options({ cache: "no-store" })
     .get()
     .json();
   return (response as any)?.data?.games || [];

@@ -9,7 +9,6 @@ interface Props {
 }
 
 export const ScoreboardAll = ({ games, onFavoriteToggle }: Props) => {
-  // console.log({ games });
   const renderGames = useMemo(() => {
     if (games.length === 0) {
       return (
