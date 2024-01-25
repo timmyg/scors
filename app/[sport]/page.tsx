@@ -7,6 +7,8 @@ import { Header } from "@/components/Header";
 import { ScoreboardPage } from "@/components/ScoreboardPage";
 import { fetcher } from "@/lib/fetcher";
 
+export const revalidate = 30; // revalidate every 30 seconds
+
 interface Response {
   data: ResponseGames;
   timestamp: string;
