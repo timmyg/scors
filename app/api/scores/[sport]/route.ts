@@ -4,11 +4,11 @@ import { NextRequest, NextResponse } from "next/server";
 import wretch from "wretch";
 
 export async function GET(req: NextRequest, { params }: any) {
-  console.log("params...", params);
-  console.log("search params...", req.nextUrl.searchParams);
+  // console.log("params...", params);
+  // console.log("search params...", req.nextUrl.searchParams);
   //   const sport: string = req.query.sport as string;
   const { sport } = params;
-  console.log({ sport });
+  // console.log({ sport });
   if (["ncaab", "nfl", "nba", "nhl", "soccer"].indexOf(sport) === -1) {
     // return res.status(400).json({ message: "Invalid sport" });
     return NextResponse.json(
@@ -36,9 +36,11 @@ export async function GET(req: NextRequest, { params }: any) {
     })
     .get()
     .json();
-  // console.log("game", JSON.stringify(response.games[0]));
+  // console.log("game", JSON.stringify(response.games[1]));
   const games: GameStatus[] = response.games.map((game: GameActionNetwork) => {
-    const [awayTeam, homeTeam] = game.teams;
+    // const [awayTeam, homeTeam] = game.teams;
+    const awayTeam = game.teams.find((t) => t.id === game.away_team_id);
+    const homeTeam = game.teams.find((t) => t.id === game.home_team_id);
     const homePoints = game.boxscore?.total_home_points || 0;
     const awayPoints = game.boxscore?.total_away_points || 0;
     return {
@@ -86,6 +88,7 @@ export async function GET(req: NextRequest, { params }: any) {
       );
     });
   }
+  // console.log({ filteredGames });
 
   // sort by in-progress, then scheduled, then the rest
   const gamesGrouped = {

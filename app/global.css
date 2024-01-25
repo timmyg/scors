@@ -43,7 +43,10 @@
     margin: 0 auto;
     display: block;
     min-width: 400px;
-    width: inherit;
+    /* width: inherit; */
+    /* flex-grow: 1;
+    padding: 10px 20px; */
+    max-width: 400px;
   }
   .search-wrapper {
     margin: 0;

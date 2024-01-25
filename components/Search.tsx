@@ -56,26 +56,30 @@ const Search = ({ initialSport, onSearch }: SearchProps) => {
   };
 
   return (
-    <div style={{}}>
-      <div style={{ display: "flex", flexDirection: "column" }}>
-        <div style={{ display: "relative" }}>
-          <input
-            className="search"
-            style={{
-              padding: "10px", // bigger
-              paddingLeft: "20px",
-              borderRadius: "8px", // rounded corners
-              fontSize: "16px", // bigger text
-              background: "transparent",
-            }}
-            type="text"
-            value={searchTerm}
-            onChange={(e) => {
-              setSearchTerm(e.target.value);
-            }}
-            placeholder="Search..."
-          />
-          {/* {searchTerm && (
+    <div style={{ display: "flex", width: "100%" }}>
+      {/* <div style={{ display: "flex", flexDirection: "column" }}> */}
+      {/* <div style={{ display: "relative" }}> */}
+      <input
+        className="search"
+        style={{
+          // padding: "10px", // bigger
+          // paddingLeft: "20px",
+          borderRadius: "8px", // rounded corners
+          fontSize: "16px", // bigger text
+          background: "transparent",
+          // width: "inherit",
+          // boxSizing: "border-box",
+          flexGrow: 1,
+          padding: "10px 20px",
+        }}
+        type="text"
+        value={searchTerm}
+        onChange={(e) => {
+          setSearchTerm(e.target.value);
+        }}
+        placeholder="Search..."
+      />
+      {/* {searchTerm && (
             <button
               onClick={clearSearch}
               style={{ position: "absolute", right: "10px" }}
@@ -83,8 +87,8 @@ const Search = ({ initialSport, onSearch }: SearchProps) => {
               x
             </button>
           )} */}
-        </div>
-      </div>
+      {/* </div> */}
+      {/* </div> */}
     </div>
   );
 };
