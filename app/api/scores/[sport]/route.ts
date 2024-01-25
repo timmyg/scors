@@ -41,6 +41,9 @@ export async function GET(req: NextRequest, { params }: any) {
     // const [awayTeam, homeTeam] = game.teams;
     const awayTeam = game.teams.find((t) => t.id === game.away_team_id);
     const homeTeam = game.teams.find((t) => t.id === game.home_team_id);
+    if (!awayTeam || !homeTeam) {
+      return console.error("missing team", game);
+    }
     const homePoints = game.boxscore?.total_home_points || 0;
     const awayPoints = game.boxscore?.total_away_points || 0;
     return {
