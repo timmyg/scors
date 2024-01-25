@@ -41,7 +41,7 @@ Props) => {
   const { data: refreshedGames, error } = useSWR(
     [`/api/scores/${initialSport}`, search],
     configuredFetcher,
-    { refreshInterval: 3 * 1000 }
+    { refreshInterval: 30 * 1000 }
   );
   //   console.log("handle");
   useEffect(() => {
