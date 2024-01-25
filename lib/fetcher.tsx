@@ -14,7 +14,10 @@ export const fetcher = async ({
   search?: string;
 }) => {
   // console.log({ baseUrl: getBaseUrl() });
-  const response = await wretch(`${getBaseUrl()}/api/scores/${sport}`)
+  const url = `${getBaseUrl()}/api/scores/${sport}${
+    search ? `?search=${search}` : ""
+  }`;
+  const response = await wretch(url)
     .options({ cache: "no-store" })
     .get()
     .json();

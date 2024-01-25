@@ -42,7 +42,7 @@ async function Home({ params }: { params: { response: any; sport: string } }) {
 
   const games = await fetcher({ sport: initialSport });
 
-  const handleSearchResults = () => {};
+  // const handleSearchResults = () => {};
 
   // const handleSearchResults = useCallback((searchedGames: GameStatus[]) => {
   //   setGames(searchedGames);

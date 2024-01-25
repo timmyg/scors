@@ -5,20 +5,21 @@ import { useState, useEffect, useCallback } from "react";
 
 interface SearchProps {
   initialSport: string;
-  onSearch?: (games: GameStatus[]) => void;
+  // onSearch?: (games: GameStatus[]) => void;
+  onSearch?: (search: string) => void;
 }
 
 const Search = ({ initialSport, onSearch }: SearchProps) => {
-  const [searchTerm, setSearchTerm] = useState("");
+  // const [searchTerm, setSearchTerm] = useState("");
 
   // Custom debounce function
-  const debounce = (func: Function, delay: number) => {
-    let timer: NodeJS.Timeout;
-    return (...args: any) => {
-      clearTimeout(timer);
-      timer = setTimeout(() => func.apply(this, args), delay);
-    };
-  };
+  // const debounce = (func: Function, delay: number) => {
+  //   let timer: NodeJS.Timeout;
+  //   return (...args: any) => {
+  //     clearTimeout(timer);
+  //     timer = setTimeout(() => func.apply(this, args), delay);
+  //   };
+  // };
 
   // Debounced API call
   // const debouncedSearch = useCallback(
@@ -37,23 +38,23 @@ const Search = ({ initialSport, onSearch }: SearchProps) => {
   //     debouncedSearch(searchTerm);
   //   }
   // }, [searchTerm, debouncedSearch]);
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch(
-        `/api/scores/${initialSport}?search=${searchTerm}`
-      );
-      const data = await response.json();
-      onSearch?.(data?.data?.games || []);
-    };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const response = await fetch(
+  //       `/api/scores/${initialSport}?search=${searchTerm}`
+  //     );
+  //     const data = await response.json();
+  //     onSearch?.(data?.data?.games || []);
+  //   };
 
-    if (searchTerm) {
-      fetchData();
-    }
-  }, [searchTerm, initialSport]);
+  //   if (searchTerm) {
+  //     fetchData();
+  //   }
+  // }, [searchTerm, initialSport]);
 
-  const clearSearch = () => {
-    setSearchTerm("");
-  };
+  // const clearSearch = () => {
+  //   setSearchTerm("");
+  // };
 
   return (
     <div style={{ display: "flex", width: "100%" }}>
@@ -73,9 +74,10 @@ const Search = ({ initialSport, onSearch }: SearchProps) => {
           padding: "10px 20px",
         }}
         type="text"
-        value={searchTerm}
+        // value={searchTerm}
         onChange={(e) => {
-          setSearchTerm(e.target.value);
+          // setSearchTerm(e.target.value);
+          onSearch?.(e.target.value);
         }}
         placeholder="Search..."
       />
